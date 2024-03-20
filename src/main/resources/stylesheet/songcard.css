@@ -1,0 +1,25 @@
+.song-card{
+    -fx-alignment: center;
+    -fx-pref-width: 200;
+    -fx-pref-height: 250;
+    -fx-background-radius: 15;
+    -fx-cursor: hand;
+}
+
+.card-mousein{
+    -fx-background-color: #E5E1DA;
+}
+
+.label{
+    -fx-font-size: 17;
+    -fx-font-style: italic;
+    -fx-pref-width: 170;
+    -fx-pref-height: 30;
+}
+
+#song-name{
+    -fx-font-style: normal;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}
+

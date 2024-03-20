@@ -2,8 +2,8 @@ package protune.model;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import protune.view.LogScene;
+import protune.view.in.InAppScene;
+import protune.view.out.LogScene;
 
 import java.io.FileNotFoundException;
 
@@ -13,9 +13,11 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws FileNotFoundException {
 
         LogScene scene = new LogScene();
+        InAppScene inAppScene = new InAppScene();
+
 
         stage.setTitle("Hello!");
-        stage.setScene(scene);
+        stage.setScene(inAppScene);
         stage.setResizable(false);
 //        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();

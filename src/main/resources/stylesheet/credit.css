@@ -1,0 +1,8 @@
+#credit-label{
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+}
+
+#credit-icon{
+    -fx-cursor: hand;
+}

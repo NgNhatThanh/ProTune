@@ -1,0 +1,38 @@
+.bg{
+    -fx-background-color: #FBF9F1;
+    -fx-background-radius: 10;
+}
+
+.nav-items{
+    -fx-cursor: hand;
+    -fx-background-radius: 10;
+    -fx-graphic-text-gap: 20;
+    -fx-padding: 10;
+    -fx-font: normal bold 20 default;
+    -fx-pref-width: 220;
+    -fx-pref-height: 50;
+}
+
+.nav-items-mousein{
+    -fx-background-color: #E5E1DA;
+}
+
+.progress-bar{
+    -fx-cursor: hand;
+    -fx-accent: green;
+}
+
+.volume-bar{
+    -fx-alignment: center;
+}
+
+.control-label{
+    /*-fx-background-color: red;*/
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+.time-label{
+    -fx-font-size: 14;
+}
+

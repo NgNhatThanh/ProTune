@@ -3,10 +3,8 @@ package protune.view;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import protune.model.Constant;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,15 +23,16 @@ public class CreditFooter extends FlowPane {
         lb.setId("credit-label");
 
         Label githubIcon = new Label();
-        githubIcon.setGraphic(new ImageView(new Image(new FileInputStream("src/main/resources/github.png"))));
+        githubIcon.setGraphic(new ImageView(new Image(new FileInputStream(Constant.githubIconPath))));
         githubIcon.setId("credit-icon");
         githubIcon.setOnMouseClicked(e -> openLink(Constant.githubLink));
 
         Label facebookIcon = new Label();
-        facebookIcon.setGraphic(new ImageView(new Image(new FileInputStream("src/main/resources/facebook.png"))));
+        facebookIcon.setGraphic(new ImageView(new Image(new FileInputStream(Constant.facebookIconPath))));
         facebookIcon.setId("credit-icon");
         facebookIcon.setOnMouseClicked(e -> openLink(Constant.facebookLink));
 
+        this.getStylesheets().add(getClass().getResource("/stylesheet/credit.css").toExternalForm());
         getChildren().addAll(lb, githubIcon, facebookIcon);
     }
 

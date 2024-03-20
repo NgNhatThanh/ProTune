@@ -1,10 +1,11 @@
-package protune.view;
+package protune.view.out;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import protune.view.out.SignInPane;
 
 public class SignUpPane extends AnchorPane {
     SignInPane paneSwitch;
