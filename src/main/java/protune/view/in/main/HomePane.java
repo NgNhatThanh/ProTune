@@ -4,10 +4,18 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
+import protune.controller.LocalFileAdd;
 import protune.model.SongData;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomePane extends ScrollPane {
-    FlowPane inside;
+
+    LocalFileAdd localFileAdd = new LocalFileAdd();
+
+    List<SongCard> songCardList = new ArrayList<>();
+    static FlowPane inside;
     public HomePane(){
         this.setPrefSize(740, 480);
         this.setLayoutX(250);
@@ -23,16 +31,12 @@ public class HomePane extends ScrollPane {
         inside.setVgap(15);
         inside.setHgap(40);
 
-        addSong(new SongCard(new SongData()));
-        addSong(new SongCard(new SongData()));
-        addSong(new SongCard(new SongData()));
-        addSong(new SongCard(new SongData()));
-
         this.setContent(inside);
         this.getStylesheets().add(getClass().getResource("/stylesheet/inapp.css").toExternalForm());
     }
 
     public void addSong(SongCard songCard){
+        songCardList.add(songCard);
         inside.getChildren().add(songCard);
     }
 }

@@ -1,0 +1,49 @@
+package protune.controller;
+
+import javafx.collections.MapChangeListener;
+import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.stage.FileChooser;
+import protune.Init;
+import protune.model.SongData;
+import protune.view.in.main.HomePane;
+import protune.view.in.main.SongCard;
+
+import java.io.File;
+import java.util.List;
+
+public class LocalFileAdd {
+    SongData songData;
+    FileChooser fileChooser = new FileChooser();
+    FileChooser.ExtensionFilter audioFilter = new FileChooser.ExtensionFilter("Audio file", "*.mp3", "*.wav");
+    Media media;
+    MediaPlayer mediaPlayer;
+    public LocalFileAdd(){
+        fileChooser.getExtensionFilters().add(audioFilter);
+    }
+
+    public void addAudio(){
+        List<File> fileList = fileChooser.showOpenMultipleDialog(null);
+
+        if(fileList == null) return;
+
+        for(var file : fileList){
+            if(file != null){
+                media = new Media(file.toURI().toString());
+                mediaPlayer = new MediaPlayer(media);
+                songData = new SongData(file);
+                Init.homePane.addSong(new SongCard(songData, SongListManager.getId()));
+                SongListManager.addSong(songData);
+            }
+        }
+
+    }
+
+    public SongData getSong(){
+        return songData;
+    }
+
+    public Media getMedia(){ return media; }
+
+}

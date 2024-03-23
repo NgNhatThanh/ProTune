@@ -1,0 +1,17 @@
+.flow-pane{
+    -fx-alignment: center;
+}
+
+.label{
+    -fx-alignment: baseline-left;
+    -fx-font-size: 18;
+}
+
+.vbox{
+    -fx-padding: 5;
+}
+
+#song-name{
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}

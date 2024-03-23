@@ -10,13 +10,18 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.shape.Rectangle;
+import protune.Init;
+import protune.controller.SongListManager;
 import protune.model.SongData;
 import javafx.scene.effect.DropShadow;
 
 import javax.swing.*;
 
 public class SongCard extends FlowPane {
-    public SongCard(SongData songData){
+    private int id;
+
+    public SongCard(SongData songData, int id){
+        this.id = id;
         ImageView imageView = new ImageView(songData.getThumbnail());
         this.getStyleClass().add("song-card");
         imageView.setFitHeight(180);
@@ -45,5 +50,11 @@ public class SongCard extends FlowPane {
         this.setOnMouseExited(e -> this.getStyleClass().remove("card-mousein"));
         this.getStylesheets().add(getClass().getResource("/stylesheet/songcard.css").toExternalForm());
         this.getChildren().addAll(songName, singer);
+
+        setOnMouseClicked(e ->{
+            Init.playBar.setSongPlay(songData, songData.getMedia());
+        });
     }
+
+
 }

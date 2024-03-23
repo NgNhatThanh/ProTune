@@ -21,9 +21,9 @@ public class NavBar extends ToolBar {
         this.getStyleClass().add("bg");
 
         List<NavItem> itemList = new ArrayList<>();
-        itemList.add(new NavItem(Constant.homeIconPath, "Home"));
-        itemList.add(new NavItem(Constant.searchIconPath, "Search"));
-        itemList.add(new NavItem(Constant.uploadIconPath, "Add song"));
+        itemList.add(new HomeItem(Constant.homeIconPath, "Home"));
+        itemList.add(new SearchItem(Constant.searchIconPath, "Search"));
+        itemList.add(new AddSongItem(Constant.uploadIconPath, "Add song"));
 
 
         this.getStylesheets().add(getClass().getResource("/stylesheet/inapp.css").toExternalForm());
