@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+import protune.Init;
 import protune.view.in.playbar.MyProgressBar;
 
 public class PlayBackZone extends FlowPane {
@@ -57,7 +58,7 @@ public class PlayBackZone extends FlowPane {
             timeStamp.setText(timeFormat(currentDuration));
             if(autoSet) progressBar.setProgress(currentDuration / totalDuration);
         });
-
+        mediaPlayer.setOnEndOfMedia(() -> Init.playBar.playNext());
         mediaPlayer.setOnReady(() -> {
             totalDuration = this.mediaPlayer.getMedia().getDuration().toSeconds();
             songDuration.setText(timeFormat(totalDuration));

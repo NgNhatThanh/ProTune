@@ -1,6 +1,5 @@
 package protune.controller;
 
-import javafx.scene.media.Media;
 import protune.Init;
 import protune.model.SongData;
 import protune.view.in.main.SongCard;
@@ -31,5 +30,24 @@ public class SongListManager {
             song.init();
             Init.homePane.addSong(new SongCard(song, id++));
         }
+    }
+
+    public static SongData getNextSong(SongData currentSong){
+        int idx = find(currentSong);
+        if(idx == songList.size() - 1) return currentSong;
+        return songList.get(idx + 1);
+    }
+
+    public static SongData getPrevSong(SongData currentSong){
+        int idx = find(currentSong);
+        if(idx == 0) return currentSong;
+        return songList.get(idx-  1);
+    }
+
+    public static int find(SongData songData){
+        for(int i = 0; i < songList.size(); ++i){
+            if(songList.get(i).equals(songData)) return i;
+        }
+        return -1;
     }
 }

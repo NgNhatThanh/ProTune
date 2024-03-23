@@ -3,6 +3,7 @@ package protune.view.in.playbar;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import protune.controller.SongListManager;
 import protune.model.SongData;
 import protune.view.in.playbar.nowplaying.NowPlayingSong;
 import protune.view.in.playbar.player.PlayerZone;
@@ -14,6 +15,7 @@ public class PlayBar extends FlowPane {
     VolumeBar volumeBar = new VolumeBar();
     Media media;
     MediaPlayer mediaPlayer;
+    SongData playingSong;
     private boolean playing = false;
     private boolean haveSong = false;
     public PlayBar(){
@@ -26,12 +28,13 @@ public class PlayBar extends FlowPane {
         this.getChildren().addAll(nowPlayingSong, playerZone, volumeBar);
     }
 
-    public void setSongPlay(SongData songData, Media media){
-        if(this.media != null && this.media == media) return;
-        this.media = media;
+    public void setSongPlay(SongData songData){
+        if(this.playingSong != null && this.playingSong == songData) return;
+        this.playingSong = songData;
+        this.media = songData.getMedia();
         this.playing = true;
         if(this.mediaPlayer != null) this.mediaPlayer.dispose();
-        this.mediaPlayer = new MediaPlayer(media);
+        this.mediaPlayer = new MediaPlayer(this.media);
         nowPlayingSong.setSong(songData);
         playerZone.setSongPlay(this.mediaPlayer);
         volumeBar.setMediaPlayer(this.mediaPlayer);
@@ -51,5 +54,15 @@ public class PlayBar extends FlowPane {
 
     public void play(){
         this.mediaPlayer.play();
+    }
+
+    public void playNext(){
+        SongData nextSong = SongListManager.getNextSong(this.playingSong);
+        setSongPlay(nextSong);
+    }
+
+    public void playPrevious(){
+        SongData prevSong = SongListManager.getPrevSong(this.playingSong);
+        setSongPlay(prevSong);
     }
 }

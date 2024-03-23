@@ -52,7 +52,7 @@ public class SongCard extends FlowPane {
         this.getChildren().addAll(songName, singer);
 
         setOnMouseClicked(e ->{
-            Init.playBar.setSongPlay(songData, songData.getMedia());
+            Init.playBar.setSongPlay(songData);
         });
     }
 

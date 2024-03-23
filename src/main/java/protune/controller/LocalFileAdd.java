@@ -11,6 +11,7 @@ import protune.view.in.main.HomePane;
 import protune.view.in.main.SongCard;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LocalFileAdd {
@@ -29,15 +30,13 @@ public class LocalFileAdd {
         if(fileList == null) return;
 
         for(var file : fileList){
-            if(file != null){
-                media = new Media(file.toURI().toString());
-                mediaPlayer = new MediaPlayer(media);
-                songData = new SongData(file);
-                Init.homePane.addSong(new SongCard(songData, SongListManager.getId()));
-                SongListManager.addSong(songData);
-            }
+            media = new Media(file.toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            songData = new SongData(file);
+            if(SongListManager.find(songData) >= 0) continue;
+            Init.homePane.addSong(new SongCard(songData, SongListManager.getId()));
+            SongListManager.addSong(songData);
         }
-
     }
 
     public SongData getSong(){

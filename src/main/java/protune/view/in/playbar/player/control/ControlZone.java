@@ -22,7 +22,7 @@ public class ControlZone extends FlowPane {
         repeatButton = new RepeatButton(Constant.repeatIconPath);
         shuffleButton = new ShuffleButton(Constant.shuffleIconPath);
 
-        this.getChildren().addAll(shuffleButton, previousButton, playButton, nextButton, repeatButton);
+        this.getChildren().addAll( previousButton, playButton, nextButton);
     }
 
     public void init(){

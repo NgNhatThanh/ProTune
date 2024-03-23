@@ -47,4 +47,8 @@ public class SongData implements Serializable {
     public String getSinger(){ return singer; }
 
     public Media getMedia(){ return media; }
+
+    public boolean equals(SongData songData){
+        return this.audioPath.getPath().equals(songData.audioPath.getPath());
+    }
 }
