@@ -5,4 +5,5 @@ module ProTune {
     requires java.desktop;
 
     opens protune.model;
+    opens protune;
 }

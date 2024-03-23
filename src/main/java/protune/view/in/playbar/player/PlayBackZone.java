@@ -62,7 +62,7 @@ public class PlayBackZone extends FlowPane {
             totalDuration = this.mediaPlayer.getMedia().getDuration().toSeconds();
             songDuration.setText(timeFormat(totalDuration));
         });
-        
+
     }
 
     private String timeFormat(double second){

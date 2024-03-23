@@ -17,7 +17,7 @@ public class FileIOSystem {
         }
         return FileIOSystemInstance;
     }
-    public  <T> List<T> read(String filePath) throws IOException, ClassNotFoundException {
+    public static <T> List<T> read(String filePath) throws IOException, ClassNotFoundException {
         List<T> list = new ArrayList<>();
         FileInputStream fileStream = null;
         ObjectInputStream a = null;
@@ -28,17 +28,17 @@ public class FileIOSystem {
         } catch (FileNotFoundException e) {
             throw new FileNotFoundException("File not found!");
         } catch (IOException e) {
-            throw new IOException("Read file failed!");
+//            throw new IOException("Read file failed!");
         } catch (ClassNotFoundException e) {
             throw new ClassNotFoundException("Class not found!");
         } finally {
-            a.close();
-            fileStream.close();
+            if(a != null) a.close();
+            if(fileStream != null) fileStream.close();
         }
         return list;
     }
 
-    public  <T> void write( List<T> list, String filePath) throws IOException {
+    public static <T> void write( List<T> list, String filePath) {
         FileOutputStream fileStream = null;
         ObjectOutputStream a = null;
         try {
@@ -47,20 +47,32 @@ public class FileIOSystem {
             a.writeObject(list);
             System.out.println("Write file " + filePath + " successfully!");
         } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("File not found!");
+//            throw new FileNotFoundException("File not found!");
+            System.out.println("file not found");
         } catch (SocketException e) {
-            throw new SocketException("Socket exception!");
+//            throw new SocketException("Socket exception!");
+            System.out.println("socket exception");
         } catch (UnknownHostException e) {
-            throw new UnknownHostException("Unknown host exception!");
+//            throw new UnknownHostException("Unknown host exception!");
+            System.out.println("unknown host");
         } catch (IOException e) {
-            throw new IOException("Write file failed!");
+//            throw new IOException("Write file failed!");
+            System.out.println("write failed");
         } finally {
-            a.close();
-            fileStream.close();
+            try {
+                a.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                fileStream.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
-    public  <T> void clearData(String filePath) throws IOException {
+    public static <T> void clearData(String filePath) throws IOException {
         List<T> list = new ArrayList<>();
         FileOutputStream fileStream = null;
         ObjectOutputStream a = null;
