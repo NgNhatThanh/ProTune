@@ -1,6 +1,6 @@
 package protune;
 
-import protune.controller.LocalFileAdd;
+import protune.controller.inapp.LocalFileAdd;
 import protune.view.in.main.HomePane;
 import protune.view.in.navbar.NavBar;
 import protune.view.in.playbar.PlayBar;

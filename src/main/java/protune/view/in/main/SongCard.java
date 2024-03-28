@@ -3,19 +3,15 @@ package protune.view.in.main;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.shape.Rectangle;
 import protune.Init;
-import protune.controller.SongListManager;
 import protune.model.SongData;
 import javafx.scene.effect.DropShadow;
 
-import javax.swing.*;
+import java.io.FileNotFoundException;
 
 public class SongCard extends FlowPane {
     private int id;
@@ -42,8 +38,8 @@ public class SongCard extends FlowPane {
 
         this.getChildren().add(imageView);
 
-        Label songName = new Label(songData.getName());
-        Label singer = new Label(songData.getSinger());
+        Label songName = new Label(songData.getTitle());
+        Label singer = new Label(songData.getArtist());
         songName.setId("song-name");
 
         this.setOnMouseEntered(e -> this.getStyleClass().add("card-mousein"));
@@ -52,7 +48,11 @@ public class SongCard extends FlowPane {
         this.getChildren().addAll(songName, singer);
 
         setOnMouseClicked(e ->{
-            Init.playBar.setSongPlay(songData);
+            try {
+                Init.playBar.setSongPlay(songData);
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 

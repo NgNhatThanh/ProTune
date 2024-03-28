@@ -9,7 +9,6 @@ public class PlayButton extends ControlButton {
 
     public PlayButton(String iconPath) {
         super(iconPath);
-        System.out.println("play");
         this.setOnMouseClicked(e -> {
             changeState();
         });

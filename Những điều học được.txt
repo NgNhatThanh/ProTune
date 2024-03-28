@@ -1,0 +1,18 @@
+* Những điều học được
+- Để lấy metadata từ một file audio
++ JAudioTagger: chỉ lấy được từ file local, nếu lấy qua url cần tải file temp về 
+	+ Note: để lấy ảnh thì chỉ cần tải tầm 20kb, không cần hết
++ Apache Tika: dùng bị lỗi, nhưng cũng lấy được metadata
+
+- Media hoạt động theo cách tải một file temp về và dùng file đấy chạy như local, chương trình kết thúc thì xóa đi
+
+- Set up AWS Credentails:
++ Tạo file .../users/Username/.aws/credentials với nội dung
+    [default]
+    aws_access_key_id = ACCESS_KEY_ID
+    aws_secret_access_key = SECRET_KEY
++ Tạo S3Client
+
+* Kinh nghiệm:
+
+- Để tránh lỗi NoSuchMethodError, cần đảm bảo version của s3 và bom giống nhau

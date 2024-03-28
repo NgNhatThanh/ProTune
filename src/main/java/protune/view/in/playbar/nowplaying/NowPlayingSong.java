@@ -44,7 +44,7 @@ public class NowPlayingSong extends FlowPane {
     public void setSong(SongData songData){
         imageView.setImage(songData.getThumbnail());
         imageView.setVisible(true);
-        songName.setText(songData.getName());
-        singer.setText(songData.getSinger());
+        songName.setText(songData.getTitle());
+        singer.setText(songData.getArtist());
     }
 }

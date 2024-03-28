@@ -1,11 +1,9 @@
 package protune.view.in.main;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
-import protune.controller.LocalFileAdd;
-import protune.model.SongData;
+import protune.controller.inapp.LocalFileAdd;
 
 import java.util.ArrayList;
 import java.util.List;

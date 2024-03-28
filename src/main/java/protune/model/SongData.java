@@ -2,53 +2,115 @@ package protune.model;
 
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
-import protune.controller.SongListManager;
+import org.jaudiotagger.audio.AudioFile;
+import org.jaudiotagger.audio.AudioFileIO;
+import org.jaudiotagger.audio.exceptions.CannotReadException;
+import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
+import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
+import org.jaudiotagger.tag.FieldKey;
+import org.jaudiotagger.tag.Tag;
+import org.jaudiotagger.tag.TagException;
+import org.jaudiotagger.tag.images.Artwork;
+import protune.HelloApplication;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.Serializable;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class SongData implements Serializable {
     private transient Media media;
     private transient Image thumbnail;
-    {
+
+    private File audioFile;
+    private String title;
+    private String artist = "null";
+    private URL url;
+
+    public SongData(File file){
+        this.audioFile = file;
+        this.setTitle(file.getName());
+        this.extractMetadata();
+//        this.media = new Media(file.toURI().toString());
+    }
+
+    public SongData(String url){
         try {
-            thumbnail = new Image(new FileInputStream("src/main/resources/img/default-thumbnail.png"));
-        } catch (FileNotFoundException e) {
+            this.url = new URL(url);
+        } catch (MalformedURLException e) {
+            System.out.println("URL not found");
+        }
+    }
+
+    public Image getThumbnail(){ return thumbnail; }
+    public String getTitle(){ return title; }
+    public void setTitle(String title){
+        int i = title.length() - 1;
+        for(; i >= 0; --i){
+            if(title.charAt(i) == '.') break;
+        }
+        this.title = title.substring(0, i);
+    }
+
+    public void init() throws FileNotFoundException {
+        if(this.audioFile.exists()){
+            System.out.println(this.audioFile.getPath());
+            this.media = new Media(this.audioFile.toURI().toString());
+        }
+        else{
+            System.out.println("url");
+            this.media = new Media(url.toString());
+        }
+    }
+
+    public void init1(){
+        extractMetadata();
+    }
+
+    private void extractMetadata(){
+        System.out.println(HelloApplication.cnt++);
+        AudioFile f;
+        try{
+            if(this.audioFile == null){
+                InputStream inputStream = url.openStream();
+                this.audioFile = File.createTempFile("temp", ".mp3");
+                FileOutputStream outputStream = new FileOutputStream(this.audioFile);
+                byte[] buffer = new byte[4096];
+                int bytesRead;
+                for(int i = 0; i < 7; ++i){
+                    bytesRead = inputStream.read(buffer);
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+                f = AudioFileIO.read(this.audioFile);
+                outputStream.close();
+                inputStream.close();
+                this.audioFile.delete();
+            }
+            else f = AudioFileIO.read(this.audioFile);
+            Tag tag = f.getTag();
+            this.title = tag.getFirst(FieldKey.TITLE);
+            this.artist = tag.getFirst(FieldKey.ARTIST);
+            System.out.println(f.getAudioHeader().getTrackLength());
+            Artwork artwork = tag.getFirstArtwork();
+
+            if (artwork != null) {
+                byte[] imageData = artwork.getBinaryData();
+                ByteArrayInputStream bai = new ByteArrayInputStream(imageData);
+                this.thumbnail = new Image(bai);
+            } else {
+                this.thumbnail = new Image(new File(Constant.defaultSongThumbnailPath).toURI().toString());
+            }
+
+        }
+        catch (TagException | CannotReadException | InvalidAudioFrameException | ReadOnlyFileException | IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private File audioPath;
-    private String thumbnailPath = "src/main/resources/img/default-thumbnail.png";
-    private String name;
-    private String singer = "null";
-
-    public SongData(File file){
-        this.audioPath = file;
-        this.setName(file.getName());
-        this.media = new Media(file.toURI().toString());
-    }
-    public Image getThumbnail(){ return thumbnail; }
-    public String getName(){ return name; }
-    public void setName(String name){
-        int i = name.length() - 1;
-        for(; i >= 0; --i){
-            if(name.charAt(i) == '.') break;
-        }
-        this.name = name.substring(0, i);
-    }
-
-    public void init() throws FileNotFoundException {
-        this.thumbnail = new Image(new FileInputStream(thumbnailPath));
-        this.media = new Media(this.audioPath.toURI().toString());
-    }
-    public String getSinger(){ return singer; }
+    public String getArtist(){ return artist; }
 
     public Media getMedia(){ return media; }
 
     public boolean equals(SongData songData){
-        return this.audioPath.getPath().equals(songData.audioPath.getPath());
+        return this.audioFile.getPath().equals(songData.audioFile.getPath());
     }
 }

@@ -3,11 +3,13 @@ package protune.view.in.playbar;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import protune.controller.SongListManager;
+import protune.controller.inapp.SongListManager;
 import protune.model.SongData;
 import protune.view.in.playbar.nowplaying.NowPlayingSong;
 import protune.view.in.playbar.player.PlayerZone;
 import protune.view.in.playbar.volume.VolumeBar;
+
+import java.io.FileNotFoundException;
 
 public class PlayBar extends FlowPane {
     NowPlayingSong nowPlayingSong = new NowPlayingSong();
@@ -28,8 +30,11 @@ public class PlayBar extends FlowPane {
         this.getChildren().addAll(nowPlayingSong, playerZone, volumeBar);
     }
 
-    public void setSongPlay(SongData songData){
+    public void setSongPlay(SongData songData) throws FileNotFoundException {
         if(this.playingSong != null && this.playingSong == songData) return;
+        if(this.mediaPlayer != null) this.mediaPlayer.dispose();
+
+        songData.init();
         this.playingSong = songData;
         this.media = songData.getMedia();
         this.playing = true;
@@ -58,11 +63,19 @@ public class PlayBar extends FlowPane {
 
     public void playNext(){
         SongData nextSong = SongListManager.getNextSong(this.playingSong);
-        setSongPlay(nextSong);
+        try {
+            setSongPlay(nextSong);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void playPrevious(){
         SongData prevSong = SongListManager.getPrevSong(this.playingSong);
-        setSongPlay(prevSong);
+        try {
+            setSongPlay(prevSong);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

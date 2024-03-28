@@ -3,8 +3,6 @@ package protune.view.in.navbar;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import protune.Init;
-import protune.controller.LocalFileAdd;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

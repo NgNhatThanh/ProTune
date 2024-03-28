@@ -1,17 +1,13 @@
-package protune.controller;
+package protune.controller.inapp;
 
-import javafx.collections.MapChangeListener;
-import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import protune.Init;
 import protune.model.SongData;
-import protune.view.in.main.HomePane;
 import protune.view.in.main.SongCard;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LocalFileAdd {
@@ -30,8 +26,8 @@ public class LocalFileAdd {
         if(fileList == null) return;
 
         for(var file : fileList){
-            media = new Media(file.toURI().toString());
-            mediaPlayer = new MediaPlayer(media);
+//            media = new Media(file.toURI().toString());
+//            mediaPlayer = new MediaPlayer(media);
             songData = new SongData(file);
             if(SongListManager.find(songData) >= 0) continue;
             Init.homePane.addSong(new SongCard(songData, SongListManager.getId()));

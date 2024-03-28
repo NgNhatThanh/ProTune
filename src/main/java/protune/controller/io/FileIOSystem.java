@@ -1,4 +1,4 @@
-package protune.controller;
+package protune.controller.io;
 
 import java.io.*;
 import java.net.SocketException;
@@ -22,7 +22,7 @@ public class FileIOSystem {
         FileInputStream fileStream = null;
         ObjectInputStream a = null;
         try {
-            fileStream = new FileInputStream(filePath);
+            fileStream = new FileInputStream(new File(filePath));
             a = new ObjectInputStream(fileStream);
             list = (List<T>) a.readObject();
         } catch (FileNotFoundException e) {
@@ -42,7 +42,7 @@ public class FileIOSystem {
         FileOutputStream fileStream = null;
         ObjectOutputStream a = null;
         try {
-            fileStream = new FileOutputStream(filePath);
+            fileStream = new FileOutputStream(new File(filePath));
             a = new ObjectOutputStream(fileStream);
             a.writeObject(list);
             System.out.println("Write file " + filePath + " successfully!");

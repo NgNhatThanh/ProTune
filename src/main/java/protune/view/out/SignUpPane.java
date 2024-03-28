@@ -5,10 +5,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import protune.controller.log.SignUpCheck;
+import protune.model.UserData;
 import protune.view.out.SignInPane;
 
 public class SignUpPane extends AnchorPane {
     SignInPane paneSwitch;
+    SignUpCheck checker = new SignUpCheck();
     public SignUpPane(){
         this.setPrefSize(400, 400);
         this.setLayoutX(80);
@@ -46,6 +49,15 @@ public class SignUpPane extends AnchorPane {
 
         lb.setLayoutY(210);
         lb2.setLayoutY(230);
+
+        signinBtn.setOnAction(e -> {
+            UserData newUser = new UserData(firstNameLabel.getText(), lastNameLabel.getText(), usernameField.getText(), passwordField.getText());
+            String message = checker.isValid(newUser);
+
+            if(message.equals("accept")){
+
+            }
+        });
 
         this.getChildren().addAll(firstNameLabel, lastNameLabel, usernameField, passwordField, lb, lb2, signinBtn);
         this.setVisible(false);
