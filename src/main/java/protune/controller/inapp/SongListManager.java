@@ -1,12 +1,12 @@
 package protune.controller.inapp;
 
+import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import protune.Init;
+import protune.controller.AWSS3Handle;
 import protune.controller.io.FileIOSystem;
 import protune.model.SongData;
 import protune.view.in.main.SongCard;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class SongListManager {
 
     public static int getId(){ return id; }
 
-    public static void importList() throws IOException, ClassNotFoundException {
+    public static void importList(){
 //        songList = FileIOSystem.read("src/main/data/songlist.bin");
 //        for(var song : songList){
 ////            song.init();
@@ -36,25 +36,43 @@ public class SongListManager {
 //            Init.homePane.addSong(new SongCard(song, id++));
 //        }
 
-        urlList = FileIOSystem.read("src/main/data/songurl.txt");
+//        urlList = FileIOSystem.read("src/main/data/songurl.bin");
+        urlList = AWSS3Handle.getAudioUrlList();
 
         for(String url : urlList){
             new Thread(() -> {
                 SongData songData = new SongData(url);
-                songData.init1();
-                songDataList.add(songData);
+
+                try {
+                    songData.init();
+                    songDataList.add(songData);
+                } catch (InvalidAudioFrameException e) {
+                    throw new RuntimeException(e);
+                }
 
             }).start();
+
+//            SongData songData = new SongData(url);
+//            try {
+//                songData.init();
+//                songDataList.add(songData);
+//            } catch (InvalidAudioFrameException e) {
+//                throw new RuntimeException(e);
+//            }
+
         }
         try {
-            Thread.sleep(5000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
+    public static void loadOnlineSong(){
+
+    }
+
     public static void addAfterImport(){
-//        System.out.println(urlList.size());
         for(SongData songData : songDataList){
             Init.homePane.addSong(new SongCard(songData, id++));
         }
@@ -66,19 +84,19 @@ public class SongListManager {
 
     public static SongData getNextSong(SongData currentSong){
         int idx = find(currentSong);
-        if(idx == songList.size() - 1) return currentSong;
-        return songList.get(idx + 1);
+        if(idx == songDataList.size() - 1) return currentSong;
+        return songDataList.get(idx + 1);
     }
 
     public static SongData getPrevSong(SongData currentSong){
         int idx = find(currentSong);
         if(idx == 0) return currentSong;
-        return songList.get(idx-  1);
+        return songDataList.get(idx-  1);
     }
 
-    public static int find(SongData songData){
-        for(int i = 0; i < songList.size(); ++i){
-            if(songList.get(i).equals(songData)) return i;
+    public static int find(SongData songData){ // online
+        for(int i = 0; i < songDataList.size(); ++i){
+            if(songDataList.get(i).equals(songData)) return i;
         }
         return -1;
     }

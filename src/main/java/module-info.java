@@ -9,9 +9,6 @@ module protune {
     requires software.amazon.awssdk.regions;
     requires software.amazon.awssdk.awscore;
 
-//    requires aws.java.sdk.core;
-    requires aws.java.sdk.s3;
-
     opens protune.model;
     opens protune;
 }

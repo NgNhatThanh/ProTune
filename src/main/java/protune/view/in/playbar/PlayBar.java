@@ -34,7 +34,7 @@ public class PlayBar extends FlowPane {
         if(this.playingSong != null && this.playingSong == songData) return;
         if(this.mediaPlayer != null) this.mediaPlayer.dispose();
 
-        songData.init();
+        songData.prepareToPlay();
         this.playingSong = songData;
         this.media = songData.getMedia();
         this.playing = true;

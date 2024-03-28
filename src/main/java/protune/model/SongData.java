@@ -29,7 +29,11 @@ public class SongData implements Serializable {
     public SongData(File file){
         this.audioFile = file;
         this.setTitle(file.getName());
-        this.extractMetadata();
+        try {
+            this.extractMetadata();
+        } catch (InvalidAudioFrameException e) {
+            throw new RuntimeException(e);
+        }
 //        this.media = new Media(file.toURI().toString());
     }
 
@@ -51,7 +55,7 @@ public class SongData implements Serializable {
         this.title = title.substring(0, i);
     }
 
-    public void init() throws FileNotFoundException {
+    public void prepareToPlay(){
         if(this.audioFile.exists()){
             System.out.println(this.audioFile.getPath());
             this.media = new Media(this.audioFile.toURI().toString());
@@ -62,11 +66,11 @@ public class SongData implements Serializable {
         }
     }
 
-    public void init1(){
+    public void init() throws InvalidAudioFrameException{
         extractMetadata();
     }
 
-    private void extractMetadata(){
+    private void extractMetadata() throws InvalidAudioFrameException{
         System.out.println(HelloApplication.cnt++);
         AudioFile f;
         try{
@@ -76,13 +80,14 @@ public class SongData implements Serializable {
                 FileOutputStream outputStream = new FileOutputStream(this.audioFile);
                 byte[] buffer = new byte[4096];
                 int bytesRead;
-                for(int i = 0; i < 7; ++i){
+                for(int i = 0; i < 60; ++i){
                     bytesRead = inputStream.read(buffer);
                     outputStream.write(buffer, 0, bytesRead);
                 }
                 f = AudioFileIO.read(this.audioFile);
                 outputStream.close();
                 inputStream.close();
+//                while(!this.audioFile.delete());
                 this.audioFile.delete();
             }
             else f = AudioFileIO.read(this.audioFile);
@@ -99,9 +104,10 @@ public class SongData implements Serializable {
             } else {
                 this.thumbnail = new Image(new File(Constant.defaultSongThumbnailPath).toURI().toString());
             }
-
+            System.out.println("oke");
         }
-        catch (TagException | CannotReadException | InvalidAudioFrameException | ReadOnlyFileException | IOException e) {
+        catch (TagException | CannotReadException | ReadOnlyFileException | IOException e) {
+            System.out.println("loi");
             throw new RuntimeException(e);
         }
     }

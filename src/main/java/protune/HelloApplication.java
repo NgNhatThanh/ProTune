@@ -1,18 +1,13 @@
 package protune;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.stage.Stage;
-import protune.controller.io.FileIOSystem;
 import protune.controller.inapp.SongListManager;
-import protune.model.SongData;
 import protune.view.in.InAppScene;
 import protune.view.out.LogScene;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 
 public class HelloApplication extends Application {
     public static int cnt = 1;
@@ -41,143 +36,49 @@ public class HelloApplication extends Application {
         });
         stage.show();
 
+
+//        Platform.runLater(() ->{
+//            SongListManager.importList();
+//            SongListManager.addAfterImport();
+//        });
+
         Task<Void> panelTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-                try {
-                    SongListManager.importList();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } catch (ClassNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
+                SongListManager.importList();
+
+//                List<String> urlList = AWSS3Handle.getAudioUrlList();
+//
+//
+//
+//                for(String url : urlList){
+//                    new Thread(() -> {
+//                        SongData songData = new SongData(url);
+//                        songData.init1();
+////                        songDataList.add(songData);
+//                        in.add(1);
+////                        Init.homePane.addSong(new SongCard(songData, 0));
+//                    }).start();
+//
+////            SongData songData = new SongData(url);
+////            songData.init1();
+////            songDataList.add(songData);
+//                }
+//                Thread.sleep(500);
                 return null;
             }
 
             @Override
             protected void succeeded() {
+                System.out.println("xong");
                 SongListManager.addAfterImport();
+//                System.out.println(in.getValue());
             }
+
         };
 
         var t = new Thread(panelTask);
         t.start();
-
-
-//        List<String> list = new ArrayList<>();
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Chung+ta+cua+hien+tai.mp3");
-//        list.add("https://ngthanh-audio.s3.ap-southeast-1.amazonaws.com/Hay+trao+cho+anh.mp3");
-//
-//        FileIOSystem.write(list, "src/main/data/songurl.txt");
-//
-//        List<String> urlList = FileIOSystem.read("src/main/data/songurl.txt");
-//        System.out.println(urlList.size());
 
     }
 
