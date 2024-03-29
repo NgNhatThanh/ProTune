@@ -1,10 +1,14 @@
 package protune.view.in.playbar.nowplaying;
 
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import protune.model.SongData;
 
 import java.io.FileInputStream;
@@ -38,13 +42,32 @@ public class NowPlayingSong extends FlowPane {
         songInfo.getStyleClass().add("vbox");
 
         this.setPrefSize(250, 90);
-        this.getChildren().addAll(imageView, songInfo);
+        this.getChildren().addAll( imageView, songInfo);
     }
 
     public void setSong(SongData songData){
-        imageView.setImage(songData.getThumbnail());
         imageView.setVisible(true);
+        imageView.setImage(songData.getThumbnail());
+//        imageView = new ImageView(songData.getThumbnail());
+
+        Rectangle rectangle = new Rectangle(80, 80);
+        rectangle.setArcHeight(20);
+        rectangle.setArcWidth(20);
+        imageView.setClip(rectangle);
+
+        SnapshotParameters parameters = new SnapshotParameters();
+        parameters.setFill(Color.TRANSPARENT);
+        WritableImage image = imageView.snapshot(parameters, null);
+
+
+//        imageView.setClip(null);
+//        imageView.setEffect(new DropShadow(20, Color.BLACK));
+        imageView.setImage(image);
+
+//        imageView.setVisible(true);
         songName.setText(songData.getTitle());
         singer.setText(songData.getArtist());
+
+//        this.getChildren().add(imageView);
     }
 }

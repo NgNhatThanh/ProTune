@@ -27,12 +27,22 @@
 }
 
 .control-label{
-    /*-fx-background-color: red;*/
     -fx-cursor: hand;
     -fx-alignment: center;
 }
 
 .time-label{
     -fx-font-size: 14;
+}
+
+.search-bar{
+    -fx-alignment: center;
+    -fx-padding: 10;
+    -fx-font-size: 25;
+    -fx-font-weight: bold;
+}
+
+.search-result{
+    -fx-background-radius: 0 0 10 10;
 }
 

@@ -16,6 +16,8 @@ import protune.HelloApplication;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.Normalizer;
+import java.util.regex.Pattern;
 
 public class SongData implements Serializable {
     private transient Media media;
@@ -47,6 +49,12 @@ public class SongData implements Serializable {
 
     public Image getThumbnail(){ return thumbnail; }
     public String getTitle(){ return title; }
+
+    public String getTitleWithoutVietAccent(){
+        String nfdNormalizedString = Normalizer.normalize(title, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(nfdNormalizedString).replaceAll("");
+    }
     public void setTitle(String title){
         int i = title.length() - 1;
         for(; i >= 0; --i){

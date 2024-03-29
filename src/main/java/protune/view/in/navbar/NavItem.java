@@ -12,7 +12,8 @@ public class NavItem extends Label {
     public NavItem(String iconPath, String content) throws FileNotFoundException {
         setText(content);
         setIcon(this, new Image(new FileInputStream(iconPath)));
-        this.setPrefSize(100, 100);
+//        this.setPrefSize(100, 100);
+        this.setHeight(100);
         this.getStyleClass().add("nav-items");
         this.setOnMouseEntered(e -> this.getStyleClass().add("nav-items-mousein"));
         this.setOnMouseExited(e -> this.getStyleClass().remove("nav-items-mousein"));

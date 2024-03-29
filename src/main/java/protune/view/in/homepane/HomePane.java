@@ -1,17 +1,13 @@
-package protune.view.in.main;
+package protune.view.in.homepane;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
-import protune.controller.inapp.LocalFileAdd;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomePane extends ScrollPane {
-
-    LocalFileAdd localFileAdd = new LocalFileAdd();
-
     List<SongCard> songCardList = new ArrayList<>();
     static FlowPane inside;
     public HomePane(){
@@ -29,6 +25,7 @@ public class HomePane extends ScrollPane {
         inside.setVgap(15);
         inside.setHgap(40);
 
+        System.out.println("call");
         this.setContent(inside);
         this.getStylesheets().add(getClass().getResource("/stylesheet/inapp.css").toExternalForm());
     }

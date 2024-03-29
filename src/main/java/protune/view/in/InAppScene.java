@@ -2,12 +2,7 @@ package protune.view.in;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.control.ScrollPane;
 import protune.Init;
-import protune.view.in.main.HomePane;
-import protune.view.in.navbar.NavBar;
-import protune.view.in.playbar.PlayBar;
-import java.io.FileNotFoundException;
 
 public class InAppScene extends Scene {
     AnchorPane pane;
@@ -16,7 +11,7 @@ public class InAppScene extends Scene {
         pane = new AnchorPane();
         this.setRoot(pane);
 
-        pane.getChildren().addAll(Init.navBar, Init.homePane, Init.playBar);
+        pane.getChildren().addAll(Init.navBar, Init.homePane, Init.searchPane, Init.playBar);
 
     }
 }

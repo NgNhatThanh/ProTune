@@ -3,16 +3,25 @@ package protune;
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.stage.Stage;
+import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import protune.controller.inapp.SongListManager;
-import protune.view.in.InAppScene;
-import protune.view.out.LogScene;
 
 import java.io.IOException;
 
 public class HelloApplication extends Application {
     public static int cnt = 1;
+//    static {
+//
+//        //Disable loggers
+//        System.Logger[] pin = new System.Logger[]{ System.getLogger("org.jaudiotagger") };
+//
+//        for (System.Logger l : pin)
+//            l.isLoggable(System.Logger.Level.OFF);
+//    }
     @Override
     public void start(Stage stage) throws IOException, ClassNotFoundException, InterruptedException {
+        stage = Init.appStage;
+        long starttime = System.currentTimeMillis();
 
 //        SongListManager.importList();
 
@@ -24,11 +33,8 @@ public class HelloApplication extends Application {
 //        for(SongData x : a) System.out.println(x.getName());
 //*
 
-        LogScene logScene = new LogScene();
-        InAppScene inAppScene = new InAppScene();
-
         stage.setTitle("Hello!");
-        stage.setScene(inAppScene);
+        stage.setScene(Init.logScene);
         stage.setResizable(false);
         stage.setOnHidden(e -> {
             SongListManager.exportList();
@@ -45,7 +51,7 @@ public class HelloApplication extends Application {
         Task<Void> panelTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-                SongListManager.importList();
+                SongListManager.importOnlineAudio();
 
 //                List<String> urlList = AWSS3Handle.getAudioUrlList();
 //
@@ -72,7 +78,13 @@ public class HelloApplication extends Application {
             protected void succeeded() {
                 System.out.println("xong");
                 SongListManager.addAfterImport();
-//                System.out.println(in.getValue());
+                System.out.println((double)(System.currentTimeMillis() - starttime) / 1000);
+
+                try {
+                    SongListManager.importLocalAudio();
+                } catch (IOException | ClassNotFoundException | InvalidAudioFrameException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
         };

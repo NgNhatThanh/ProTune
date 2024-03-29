@@ -5,7 +5,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import protune.Init;
 import protune.model.SongData;
-import protune.view.in.main.SongCard;
+import protune.view.in.homepane.SongCard;
 
 import java.io.File;
 import java.util.List;
@@ -26,8 +26,6 @@ public class LocalFileAdd {
         if(fileList == null) return;
 
         for(var file : fileList){
-//            media = new Media(file.toURI().toString());
-//            mediaPlayer = new MediaPlayer(media);
             songData = new SongData(file);
             if(SongListManager.find(songData) >= 0) continue;
             Init.homePane.addSong(new SongCard(songData, SongListManager.getId()));

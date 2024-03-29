@@ -1,15 +1,15 @@
-package protune.view.in.main;
+package protune.view.in.homepane;
 
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.shape.Rectangle;
 import protune.Init;
 import protune.model.SongData;
-import javafx.scene.effect.DropShadow;
 
 import java.io.FileNotFoundException;
 
@@ -55,6 +55,4 @@ public class SongCard extends FlowPane {
             }
         });
     }
-
-
 }
