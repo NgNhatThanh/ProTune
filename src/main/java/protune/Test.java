@@ -2,9 +2,14 @@ package protune;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import protune.model.Constant;
+
+import java.io.File;
 
 
 public class Test extends Application {
@@ -14,24 +19,18 @@ public class Test extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        StackPane stackPane = new StackPane();
 
-        Rectangle rect1 = new Rectangle(100, 100);
-        rect1.setStyle("-fx-fill: red;");
+        AnchorPane anchorPane = new AnchorPane();
+        anchorPane.setPrefSize(500, 500);
 
-        Rectangle rect2 = new Rectangle(100, 100);
-        rect2.setStyle("-fx-fill: blue;");
+        ImageView imageView = new ImageView(new Image(new File(Constant.defaultSongThumbnailPath).toURI().toString()));
 
-        stackPane.getChildren().addAll(rect1, rect2);
 
-        Stage stage = new Stage();
+        Label lb = new Label("a");
 
-        rect1.setOnMouseClicked(e -> rect2.toFront());
-        rect2.setOnMouseClicked(e -> rect1.toFront());
-
-        Scene scene = new Scene(stackPane, 100, 100);
-
-        stage.setScene(scene);
-        stage.show();
+        anchorPane.getChildren().addAll(imageView, lb);
+        Scene scene = new Scene(anchorPane, 500, 500);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }

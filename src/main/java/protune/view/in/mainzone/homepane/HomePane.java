@@ -3,12 +3,13 @@ package protune.view.in.mainzone.homepane;
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
+import protune.view.in.mainzone.homepane.audiocard.SongCard;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomePane extends ScrollPane {
-    private List<SongCard> songCardList = new ArrayList<>();
+    protected List<SongCard> songCardList = new ArrayList<>();
     protected FlowPane inside;
     public HomePane(){
         this.setHbarPolicy(ScrollBarPolicy.NEVER);
@@ -27,6 +28,7 @@ public class HomePane extends ScrollPane {
     }
 
     public void addSong(SongCard songCard){
+        System.out.println("bo");
         songCardList.add(songCard);
         inside.getChildren().add(songCard);
     }

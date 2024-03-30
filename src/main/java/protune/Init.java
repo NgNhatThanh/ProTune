@@ -6,9 +6,9 @@ import protune.view.in.InAppScene;
 import protune.view.in.mainzone.MainZone;
 import protune.view.in.mainzone.homepane.HomePane;
 import protune.view.in.mainzone.localpane.LocalPane;
+import protune.view.in.mainzone.searchpane.SearchPane;
 import protune.view.in.navbar.NavBar;
 import protune.view.in.playbar.PlayBar;
-import protune.view.in.mainzone.searchpane.SearchPane;
 import protune.view.out.LogScene;
 
 import java.io.FileNotFoundException;
@@ -34,7 +34,6 @@ public class Init {
     static public LocalFileAdd localFileAdd = new LocalFileAdd();
 
     static public Stage appStage = new Stage();
-
     static public LogScene logScene;
     static {
         try {

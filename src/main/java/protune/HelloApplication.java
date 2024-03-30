@@ -37,7 +37,7 @@ public class HelloApplication extends Application {
         stage.setScene(Init.logScene);
         stage.setResizable(false);
         stage.setOnHidden(e -> {
-            SongListManager.exportList();
+            SongListManager.exportLocalList();
             System.exit(0);
         });
         stage.show();
@@ -51,7 +51,7 @@ public class HelloApplication extends Application {
         Task<Void> panelTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-                SongListManager.importOnlineAudio();
+                SongListManager.getOnlineAudioList();
 
 //                List<String> urlList = AWSS3Handle.getAudioUrlList();
 //
@@ -77,7 +77,7 @@ public class HelloApplication extends Application {
             @Override
             protected void succeeded() {
                 System.out.println("xong");
-                SongListManager.addAfterImport();
+                SongListManager.addOnlineAudio();
                 System.out.println((double)(System.currentTimeMillis() - starttime) / 1000);
 
                 try {

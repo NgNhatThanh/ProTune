@@ -5,7 +5,7 @@ import protune.Init;
 import protune.controller.AWSS3Handle;
 import protune.controller.io.FileIOSystem;
 import protune.model.SongData;
-import protune.view.in.mainzone.homepane.SongCard;
+import protune.view.in.mainzone.homepane.audiocard.SongCard;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,23 +15,19 @@ public class SongListManager {
     private static List<SongData> localSDList = new ArrayList<>();
     private static List<String> urlList;
     private static List<SongData> homeSDList = new ArrayList<>();
-    private static int id = 0;
-    public static List<SongData> getList(){
+    public static List<SongData> getLocalList(){
         return localSDList;
     }
+    public static int onlineAudioCount;
 
     public static void addSong(SongData songData){
+        homeSDList.add(songData);
         localSDList.add(songData);
-        ++id;
     }
 
-    public static SongData getSong(int id){ return localSDList.get(id); };
-
-    public static int getId(){ return id; }
-
-    public static void importOnlineAudio(){
+    public static void getOnlineAudioList(){
         urlList = AWSS3Handle.getAudioUrlList();
-
+        onlineAudioCount = urlList.size();
         for(String url : urlList){
             new Thread(() -> {
                 SongData songData = new SongData(url);
@@ -57,19 +53,20 @@ public class SongListManager {
         homeSDList.addAll(localSDList);
         for(var song : localSDList){
             song.init();
-            Init.homePane.addSong(new SongCard(song, id++));
+            Init.homePane.addSong(new SongCard(song));
+            Init.localPane.addSong(new SongCard(song));
         }
     }
 
-    public static void addAfterImport(){
-        while(homeSDList.size() < 22) System.out.print("");
+    public static void addOnlineAudio(){
+        while(homeSDList.size() < onlineAudioCount) System.out.print("");
         for(SongData songData : homeSDList){
-            Init.homePane.addSong(new SongCard(songData, id++));
+            Init.homePane.addSong(new SongCard(songData));
         }
     }
 
-    public static void exportList(){
-        FileIOSystem.write(SongListManager.getList(), "src/main/data/songlist.bin");
+    public static void exportLocalList(){
+        FileIOSystem.write(SongListManager.getLocalList(), "src/main/data/songlist.bin");
     }
 
     public static SongData getNextSong(SongData currentSong){

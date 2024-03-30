@@ -16,8 +16,8 @@ import java.io.FileNotFoundException;
 
 public class NowPlayingSong extends FlowPane {
     ImageView imageView;
-    Label songName = new Label();
-    Label singer = new Label();
+    Label title = new Label();
+    Label artist = new Label();
     VBox songInfo = new VBox();
     public NowPlayingSong(){
         this.getStylesheets().add(getClass().getResource("/stylesheet/nowplaying.css").toExternalForm());
@@ -32,13 +32,13 @@ public class NowPlayingSong extends FlowPane {
         imageView.setFitWidth(80);
         imageView.setVisible(false);
 
-        songName.setWrapText(true);
-        songName.setId("song-name");
-        singer.setWrapText(true);
+        title.setWrapText(true);
+        title.setId("song-name");
+        artist.setWrapText(true);
 
         songInfo.setPrefSize(150, 90);
         songInfo.setLayoutX(100);
-        songInfo.getChildren().addAll(songName, singer);
+        songInfo.getChildren().addAll(title, artist);
         songInfo.getStyleClass().add("vbox");
 
         this.setPrefSize(250, 90);
@@ -48,7 +48,6 @@ public class NowPlayingSong extends FlowPane {
     public void setSong(SongData songData){
         imageView.setVisible(true);
         imageView.setImage(songData.getThumbnail());
-//        imageView = new ImageView(songData.getThumbnail());
 
         Rectangle rectangle = new Rectangle(80, 80);
         rectangle.setArcHeight(20);
@@ -59,15 +58,9 @@ public class NowPlayingSong extends FlowPane {
         parameters.setFill(Color.TRANSPARENT);
         WritableImage image = imageView.snapshot(parameters, null);
 
-
-//        imageView.setClip(null);
-//        imageView.setEffect(new DropShadow(20, Color.BLACK));
         imageView.setImage(image);
 
-//        imageView.setVisible(true);
-        songName.setText(songData.getTitle());
-        singer.setText(songData.getArtist());
-
-//        this.getChildren().add(imageView);
+        title.setText(songData.getTitle());
+        artist.setText(songData.getArtist());
     }
 }

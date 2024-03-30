@@ -1,4 +1,4 @@
-package protune.view.in.navbar;
+package protune.view.in.navbar.item;
 
 import protune.Init;
 

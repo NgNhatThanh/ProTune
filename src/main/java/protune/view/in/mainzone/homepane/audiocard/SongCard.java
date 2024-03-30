@@ -1,10 +1,11 @@
-package protune.view.in.mainzone.homepane;
+package protune.view.in.mainzone.homepane.audiocard;
 
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -14,10 +15,10 @@ import protune.model.SongData;
 import java.io.FileNotFoundException;
 
 public class SongCard extends FlowPane {
-    private int id;
 
-    public SongCard(SongData songData, int id){
-        this.id = id;
+    public SongCard(SongData songData){
+        AnchorPane imageZone = new AnchorPane();
+
         ImageView imageView = new ImageView(songData.getThumbnail());
         this.getStyleClass().add("song-card");
         imageView.setFitHeight(180);
@@ -36,7 +37,7 @@ public class SongCard extends FlowPane {
         imageView.setEffect(new DropShadow(20, Color.BLACK));
         imageView.setImage(image);
 
-        this.getChildren().add(imageView);
+        imageZone.getChildren().add(imageView);
 
         Label songName = new Label(songData.getTitle());
         Label singer = new Label(songData.getArtist());
@@ -45,7 +46,7 @@ public class SongCard extends FlowPane {
         this.setOnMouseEntered(e -> this.getStyleClass().add("card-mousein"));
         this.setOnMouseExited(e -> this.getStyleClass().remove("card-mousein"));
         this.getStylesheets().add(getClass().getResource("/stylesheet/songcard.css").toExternalForm());
-        this.getChildren().addAll(songName, singer);
+        this.getChildren().addAll(imageZone, songName, singer);
 
         setOnMouseClicked(e ->{
             try {

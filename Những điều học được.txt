@@ -16,3 +16,11 @@
 * Kinh nghiệm:
 
 - Để tránh lỗi NoSuchMethodError, cần đảm bảo version của s3 và bom giống nhau
+- Một Node không thể cùng tồn tại ở 2 Parent được.
+  VD: 	    Label lb = new Label("a");
+            p1.getChildren().add(lb);
+            p2.getChildren().add(lb);
+  Lúc này, sẽ chỉ có p2 được thêm lb vì lb đã được di chuyển từ p1 -> p2 do không thể tồn tại ở cả p1 và p2
+  Trong trường hợp này, nếu muốn thêm lb ở cả 2 thì sẽ tạo instance mới cho lb ở cả p1 và p2
+	    p1.getChildren().add(new Label("a"));
+            p2.getChildren().add(new Label("a"));

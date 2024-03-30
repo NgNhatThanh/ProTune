@@ -3,7 +3,7 @@ package protune.view.in.mainzone.searchpane;
 import protune.controller.inapp.SongListManager;
 import protune.model.SongData;
 import protune.view.in.mainzone.homepane.HomePane;
-import protune.view.in.mainzone.homepane.SongCard;
+import protune.view.in.mainzone.homepane.audiocard.SongCard;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class SearchResult extends HomePane {
         inside.getChildren().clear();
         List<SongData> result = SongListManager.findByKey(key);
         for(SongData songData : result){
-            inside.getChildren().add(new SongCard(songData, 0));
+            inside.getChildren().add(new SongCard(songData));
         }
     }
 }
