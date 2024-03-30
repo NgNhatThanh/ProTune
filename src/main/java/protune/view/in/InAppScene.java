@@ -11,7 +11,7 @@ public class InAppScene extends Scene {
         pane = new AnchorPane();
         this.setRoot(pane);
 
-        pane.getChildren().addAll(Init.navBar, Init.homePane, Init.searchPane, Init.playBar);
+        pane.getChildren().addAll(Init.navBar, Init.mainZone, Init.playBar);
 
     }
 }

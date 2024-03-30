@@ -1,4 +1,4 @@
-package protune.view.in.homepane;
+package protune.view.in.mainzone.homepane;
 
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
@@ -53,6 +53,8 @@ public class SongCard extends FlowPane {
             } catch (FileNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
+//            Init.homePane.del(this);
+
         });
     }
 }

@@ -4,11 +4,11 @@ import protune.Init;
 
 import java.io.FileNotFoundException;
 
-public class SearchItem extends NavItem{
-    public SearchItem(String iconPath, String content) throws FileNotFoundException {
+public class MyLocalItem extends NavItem{
+    public MyLocalItem(String iconPath, String content) throws FileNotFoundException {
         super(iconPath, content);
         this.setOnMouseClicked(e -> {
-            Init.searchPane.toFront();
+            Init.localPane.toFront();
         });
     }
 }

@@ -1,4 +1,4 @@
-package protune.view.in.homepane;
+package protune.view.in.mainzone.homepane;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
@@ -8,12 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomePane extends ScrollPane {
-    List<SongCard> songCardList = new ArrayList<>();
-    static FlowPane inside;
+    private List<SongCard> songCardList = new ArrayList<>();
+    protected FlowPane inside;
     public HomePane(){
-        this.setPrefSize(740, 480);
-        this.setLayoutX(250);
-        this.setLayoutY(10);
         this.setHbarPolicy(ScrollBarPolicy.NEVER);
         this.getStyleClass().add("bg");
 
@@ -25,7 +22,6 @@ public class HomePane extends ScrollPane {
         inside.setVgap(15);
         inside.setHgap(40);
 
-        System.out.println("call");
         this.setContent(inside);
         this.getStylesheets().add(getClass().getResource("/stylesheet/inapp.css").toExternalForm());
     }
@@ -34,4 +30,10 @@ public class HomePane extends ScrollPane {
         songCardList.add(songCard);
         inside.getChildren().add(songCard);
     }
+
+//    public void del(SongCard songCard){
+//        System.out.println("xoa");
+//        inside.getChildren().remove(songCard);
+//        songCard.setVisible(false);
+//    }
 }

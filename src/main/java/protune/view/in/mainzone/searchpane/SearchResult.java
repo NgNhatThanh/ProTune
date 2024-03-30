@@ -1,27 +1,18 @@
-package protune.view.in.searchpane;
+package protune.view.in.mainzone.searchpane;
 
-import javafx.geometry.Insets;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.FlowPane;
 import protune.controller.inapp.SongListManager;
 import protune.model.SongData;
-import protune.view.in.homepane.SongCard;
+import protune.view.in.mainzone.homepane.HomePane;
+import protune.view.in.mainzone.homepane.SongCard;
 
 import java.util.List;
 
-public class SearchResult extends ScrollPane {
-    static FlowPane inside;
+public class SearchResult extends HomePane {
     public SearchResult(){
-        this.setHbarPolicy(ScrollBarPolicy.NEVER);
         this.setPrefSize(740, 410);
 
-
-        inside = new FlowPane();
-        inside.setPadding(new Insets(15, 20, 15, 20));
         inside.setPrefWidth(740);
         inside.setPrefHeight(410);
-        inside.setVgap(15);
-        inside.setHgap(40);
         inside.getStyleClass().addAll("bg","search-result");
 
         this.setContent(inside);

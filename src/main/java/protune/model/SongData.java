@@ -88,7 +88,7 @@ public class SongData implements Serializable {
                 FileOutputStream outputStream = new FileOutputStream(this.audioFile);
                 byte[] buffer = new byte[4096];
                 int bytesRead;
-                for(int i = 0; i < 60; ++i){
+                for(int i = 0; i < 80; ++i){
                     bytesRead = inputStream.read(buffer);
                     outputStream.write(buffer, 0, bytesRead);
                 }

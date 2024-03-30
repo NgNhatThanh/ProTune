@@ -5,7 +5,7 @@ import protune.Init;
 import protune.controller.AWSS3Handle;
 import protune.controller.io.FileIOSystem;
 import protune.model.SongData;
-import protune.view.in.homepane.SongCard;
+import protune.view.in.mainzone.homepane.SongCard;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.List;
 public class SongListManager {
     private static List<SongData> localSDList = new ArrayList<>();
     private static List<String> urlList;
-    private static List<SongData> onlineSDList = new ArrayList<>();
+    private static List<SongData> homeSDList = new ArrayList<>();
     private static int id = 0;
     public static List<SongData> getList(){
         return localSDList;
@@ -38,7 +38,7 @@ public class SongListManager {
 
                 try {
                     songData.init();
-                    onlineSDList.add(songData);
+                    homeSDList.add(songData);
                 } catch (InvalidAudioFrameException e) {
                     throw new RuntimeException(e);
                 }
@@ -54,6 +54,7 @@ public class SongListManager {
 
     public static void importLocalAudio() throws IOException, ClassNotFoundException, InvalidAudioFrameException {
         localSDList = FileIOSystem.read("src/main/data/songlist.bin");
+        homeSDList.addAll(localSDList);
         for(var song : localSDList){
             song.init();
             Init.homePane.addSong(new SongCard(song, id++));
@@ -61,8 +62,8 @@ public class SongListManager {
     }
 
     public static void addAfterImport(){
-        while(onlineSDList.size() < 22) System.out.print("");
-        for(SongData songData : onlineSDList){
+        while(homeSDList.size() < 22) System.out.print("");
+        for(SongData songData : homeSDList){
             Init.homePane.addSong(new SongCard(songData, id++));
         }
     }
@@ -73,26 +74,30 @@ public class SongListManager {
 
     public static SongData getNextSong(SongData currentSong){
         int idx = find(currentSong);
-        if(idx == onlineSDList.size() - 1) return currentSong;
-        return onlineSDList.get(idx + 1);
+        if(idx == homeSDList.size() - 1) return currentSong;
+        return homeSDList.get(idx + 1);
     }
 
     public static SongData getPrevSong(SongData currentSong){
         int idx = find(currentSong);
         if(idx == 0) return currentSong;
-        return onlineSDList.get(idx-  1);
+        return homeSDList.get(idx-  1);
     }
 
     public static int find(SongData songData){ // online
-        for(int i = 0; i < onlineSDList.size(); ++i){
-            if(onlineSDList.get(i).equals(songData)) return i;
+        for(int i = 0; i < homeSDList.size(); ++i){
+            if(homeSDList.get(i).equals(songData)) return i;
         }
         return -1;
     }
 
+    public static void del(int id){
+        homeSDList.remove(id);
+    }
+
     public static List<SongData> findByKey(String key){
         List<SongData> result = new ArrayList<>();
-        for(SongData songData : onlineSDList){
+        for(SongData songData : homeSDList){
             if(songData.getTitleWithoutVietAccent().toLowerCase().contains(key.toLowerCase()) ||
                songData.getTitle().toLowerCase().contains(key.toLowerCase())) result.add(songData);
         }

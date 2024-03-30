@@ -1,13 +1,9 @@
-package protune.view.in.searchpane;
+package protune.view.in.mainzone.searchpane;
 
 import javafx.scene.layout.VBox;
 
 public class SearchPane extends VBox {
     public SearchPane(){
-        this.setVisible(false);
-        this.setPrefSize(740, 480);
-        this.setLayoutX(250);
-        this.setLayoutY(10);
         this.getStyleClass().add("bg");
 
         SearchResult searchResultPane = new SearchResult();

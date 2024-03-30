@@ -1,8 +1,5 @@
 package protune.model;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 public class Constant {
     static public final int appHeight = 600; // min: 600
     static public final int appWidth = 1000; // min: 1000
@@ -13,6 +10,7 @@ public class Constant {
     static public final String homeIconPath = "src/main/resources/img/home.png";
     static public final String searchIconPath = "src/main/resources/img/search.png";
     static public final String uploadIconPath = "src/main/resources/img/upload.png";
+    static public final String localIconPath = "src/main/resources/img/local.png";
     static public final String playIconPath = "src/main/resources/img/play.png";
     static public final String pauseIconPath = "src/main/resources/img/pause.png";
     static public final String nextIconPath = "src/main/resources/img/next.png";

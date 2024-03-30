@@ -1,4 +1,4 @@
-package protune.view.in.searchpane;
+package protune.view.in.mainzone.searchpane;
 
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;

@@ -3,10 +3,12 @@ package protune;
 import javafx.stage.Stage;
 import protune.controller.inapp.LocalFileAdd;
 import protune.view.in.InAppScene;
-import protune.view.in.homepane.HomePane;
+import protune.view.in.mainzone.MainZone;
+import protune.view.in.mainzone.homepane.HomePane;
+import protune.view.in.mainzone.localpane.LocalPane;
 import protune.view.in.navbar.NavBar;
 import protune.view.in.playbar.PlayBar;
-import protune.view.in.searchpane.SearchPane;
+import protune.view.in.mainzone.searchpane.SearchPane;
 import protune.view.out.LogScene;
 
 import java.io.FileNotFoundException;
@@ -25,6 +27,9 @@ public class Init {
     static public PlayBar playBar = new PlayBar();
 
     static public SearchPane searchPane = new SearchPane();
+
+    static public LocalPane localPane = new LocalPane();
+    static public MainZone mainZone = new MainZone();
 
     static public LocalFileAdd localFileAdd = new LocalFileAdd();
 

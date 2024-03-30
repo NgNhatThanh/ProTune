@@ -5,7 +5,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import protune.Init;
 import protune.model.SongData;
-import protune.view.in.homepane.SongCard;
+import protune.view.in.mainzone.homepane.SongCard;
 
 import java.io.File;
 import java.util.List;
