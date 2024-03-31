@@ -27,19 +27,24 @@ public class SongData implements Serializable {
     private String title;
     private String artist = "null";
     private URL url;
+    private int id;
+    private boolean local = false;
+    public int getId(){ return id; }
 
+    public boolean isLocal(){ return local; }
     public SongData(File file){
+        local = true;
+        id = hashCode();
         this.audioFile = file;
-        this.setTitle(file.getName());
         try {
             this.extractMetadata();
         } catch (InvalidAudioFrameException e) {
             throw new RuntimeException(e);
         }
-//        this.media = new Media(file.toURI().toString());
     }
 
     public SongData(String url){
+        id = hashCode();
         try {
             this.url = new URL(url);
         } catch (MalformedURLException e) {
@@ -95,12 +100,12 @@ public class SongData implements Serializable {
                 f = AudioFileIO.read(this.audioFile);
                 outputStream.close();
                 inputStream.close();
-//                while(!this.audioFile.delete());
                 this.audioFile.delete();
             }
             else f = AudioFileIO.read(this.audioFile);
             Tag tag = f.getTag();
             this.title = tag.getFirst(FieldKey.TITLE);
+            if(this.title.isEmpty()) this.title = audioFile.getName();
             this.artist = tag.getFirst(FieldKey.ARTIST);
             System.out.println(f.getAudioHeader().getTrackLength());
             Artwork artwork = tag.getFirstArtwork();
@@ -124,7 +129,7 @@ public class SongData implements Serializable {
 
     public Media getMedia(){ return media; }
 
-    public boolean equals(SongData songData){
+    public boolean isSamePath(SongData songData){
         return this.audioFile.getPath().equals(songData.audioFile.getPath());
     }
 }

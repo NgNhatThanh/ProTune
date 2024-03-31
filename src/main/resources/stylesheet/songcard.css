@@ -23,3 +23,15 @@
     -fx-font-weight: bold;
 }
 
+.card-btn{
+    -fx-background-color: lightgrey;
+    -fx-background-radius: 50;
+    -fx-alignment: center;
+    -fx-pref-width: 50;
+    -fx-pref-height: 50;
+}
+
+.btn-mousein{
+    -fx-background-color: grey;
+}
+

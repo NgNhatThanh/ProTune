@@ -1,15 +1,16 @@
 package protune.view.in.mainzone.homepane;
 
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
-import protune.view.in.mainzone.homepane.audiocard.SongCard;
+import protune.view.in.mainzone.homepane.audiocard.AudioCard;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomePane extends ScrollPane {
-    protected List<SongCard> songCardList = new ArrayList<>();
+    protected List<AudioCard> audioCardList = new ArrayList<>();
     protected FlowPane inside;
     public HomePane(){
         this.setHbarPolicy(ScrollBarPolicy.NEVER);
@@ -27,15 +28,18 @@ public class HomePane extends ScrollPane {
         this.getStylesheets().add(getClass().getResource("/stylesheet/inapp.css").toExternalForm());
     }
 
-    public void addSong(SongCard songCard){
+    public void addSong(AudioCard audioCard){
         System.out.println("bo");
-        songCardList.add(songCard);
-        inside.getChildren().add(songCard);
+        audioCardList.add(audioCard);
+        inside.getChildren().add(audioCard);
     }
 
-//    public void del(SongCard songCard){
-//        System.out.println("xoa");
-//        inside.getChildren().remove(songCard);
-//        songCard.setVisible(false);
-//    }
+    public void del(AudioCard audioCard){
+        for(Node child : inside.getChildren()){
+            if(audioCard.equal((AudioCard) child)){
+                inside.getChildren().remove(child);
+                break;
+            }
+        }
+    }
 }

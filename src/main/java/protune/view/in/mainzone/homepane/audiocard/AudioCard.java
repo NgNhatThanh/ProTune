@@ -9,16 +9,19 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import protune.Init;
+import protune.model.Constant;
 import protune.model.SongData;
+import protune.view.in.mainzone.homepane.audiocard.button.PlayButton;
 
-import java.io.FileNotFoundException;
+public class AudioCard extends FlowPane {
 
-public class SongCard extends FlowPane {
+    private final int id;
+    private final SongData songData;
+    protected AnchorPane imageZone = new AnchorPane();
 
-    public SongCard(SongData songData){
-        AnchorPane imageZone = new AnchorPane();
-
+    public AudioCard(SongData songData){
+        this.id = songData.getId();
+        this.songData = songData;
         ImageView imageView = new ImageView(songData.getThumbnail());
         this.getStyleClass().add("song-card");
         imageView.setFitHeight(180);
@@ -37,7 +40,7 @@ public class SongCard extends FlowPane {
         imageView.setEffect(new DropShadow(20, Color.BLACK));
         imageView.setImage(image);
 
-        imageZone.getChildren().add(imageView);
+        imageZone.getChildren().addAll(imageView, new PlayButton(Constant.cardPlayIconPath, this));
 
         Label songName = new Label(songData.getTitle());
         Label singer = new Label(songData.getArtist());
@@ -48,14 +51,11 @@ public class SongCard extends FlowPane {
         this.getStylesheets().add(getClass().getResource("/stylesheet/songcard.css").toExternalForm());
         this.getChildren().addAll(imageZone, songName, singer);
 
-        setOnMouseClicked(e ->{
-            try {
-                Init.playBar.setSongPlay(songData);
-            } catch (FileNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
-//            Init.homePane.del(this);
+    }
 
-        });
+    public SongData getdata(){ return songData; }
+
+    public boolean equal(AudioCard other){
+        return this.id == other.id;
     }
 }

@@ -1,6 +1,5 @@
 package protune.view.in.playbar.player.control.button;
 
-import javafx.scene.image.Image;
 import protune.Init;
 import protune.model.Constant;
 import protune.view.in.playbar.player.control.ControlButton;

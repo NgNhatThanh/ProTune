@@ -5,7 +5,8 @@ import protune.Init;
 import protune.controller.AWSS3Handle;
 import protune.controller.io.FileIOSystem;
 import protune.model.SongData;
-import protune.view.in.mainzone.homepane.audiocard.SongCard;
+import protune.view.in.mainzone.homepane.audiocard.AudioCard;
+import protune.view.in.mainzone.homepane.audiocard.LocalAudioCard;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,15 +54,15 @@ public class SongListManager {
         homeSDList.addAll(localSDList);
         for(var song : localSDList){
             song.init();
-            Init.homePane.addSong(new SongCard(song));
-            Init.localPane.addSong(new SongCard(song));
+            Init.homePane.addSong(new LocalAudioCard(song));
+            Init.localPane.addSong(new LocalAudioCard(song));
         }
     }
 
     public static void addOnlineAudio(){
         while(homeSDList.size() < onlineAudioCount) System.out.print("");
         for(SongData songData : homeSDList){
-            Init.homePane.addSong(new SongCard(songData));
+            Init.homePane.addSong(new AudioCard(songData));
         }
     }
 
@@ -83,13 +84,18 @@ public class SongListManager {
 
     public static int find(SongData songData){ // online
         for(int i = 0; i < homeSDList.size(); ++i){
-            if(homeSDList.get(i).equals(songData)) return i;
+            if(homeSDList.get(i).isSamePath(songData)) return i;
         }
         return -1;
     }
 
-    public static void del(int id){
-        homeSDList.remove(id);
+    public static void del(SongData songData){
+        for(int i = 0; i < localSDList.size(); ++i){
+            if(localSDList.get(i).isSamePath(songData)){
+                localSDList.remove(i);
+                homeSDList.remove(onlineAudioCount + i);
+            }
+        }
     }
 
     public static List<SongData> findByKey(String key){

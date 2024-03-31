@@ -5,7 +5,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import protune.Init;
 import protune.model.SongData;
-import protune.view.in.mainzone.homepane.audiocard.SongCard;
+import protune.view.in.mainzone.homepane.audiocard.LocalAudioCard;
 
 import java.io.File;
 import java.util.List;
@@ -28,8 +28,8 @@ public class LocalFileAdd {
         for(var file : fileList){
             songData = new SongData(file);
             if(SongListManager.find(songData) >= 0) continue;
-            Init.localPane.addSong(new SongCard(songData));
-            Init.homePane.addSong(new SongCard(songData));
+            Init.localPane.addSong(new LocalAudioCard(songData));
+            Init.homePane.addSong(new LocalAudioCard(songData));
             SongListManager.addSong(songData);
         }
     }
