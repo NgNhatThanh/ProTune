@@ -53,6 +53,9 @@ public class SongData implements Serializable {
     }
 
     public Image getThumbnail(){ return thumbnail; }
+    public void setThumbnail(Image thumbnail){
+        this.thumbnail = thumbnail;
+    }
     public String getTitle(){ return title; }
 
     public String getTitleWithoutVietAccent(){
@@ -105,7 +108,7 @@ public class SongData implements Serializable {
             else f = AudioFileIO.read(this.audioFile);
             Tag tag = f.getTag();
             this.title = tag.getFirst(FieldKey.TITLE);
-            if(this.title.isEmpty()) this.title = audioFile.getName();
+            if(this.title.isEmpty()) setTitle(audioFile.getName());
             this.artist = tag.getFirst(FieldKey.ARTIST);
             System.out.println(f.getAudioHeader().getTrackLength());
             Artwork artwork = tag.getFirstArtwork();
@@ -128,6 +131,8 @@ public class SongData implements Serializable {
     public String getArtist(){ return artist; }
 
     public Media getMedia(){ return media; }
+
+    public File getAudioFile(){ return audioFile; }
 
     public boolean isSamePath(SongData songData){
         return this.audioFile.getPath().equals(songData.audioFile.getPath());

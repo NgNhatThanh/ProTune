@@ -10,28 +10,11 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
     public static int cnt = 1;
-//    static {
-//
-//        //Disable loggers
-//        System.Logger[] pin = new System.Logger[]{ System.getLogger("org.jaudiotagger") };
-//
-//        for (System.Logger l : pin)
-//            l.isLoggable(System.Logger.Level.OFF);
-//    }
+
     @Override
-    public void start(Stage stage) throws IOException, ClassNotFoundException, InterruptedException {
+    public void start(Stage stage){
         stage = Init.appStage;
         long starttime = System.currentTimeMillis();
-
-//        SongListManager.importList();
-
-//        FileInputStream fis = new FileInputStream(new File("D:\\ProTune\\src\\main\\data\\songlist.bin"));
-//        ObjectInputStream ois = new ObjectInputStream(fis);
-//
-//        ArrayList<SongData> a = (ArrayList<SongData>) ois.readObject();
-//
-//        for(SongData x : a) System.out.println(x.getName());
-//*
 
         stage.setTitle("Hello!");
         stage.setScene(Init.logScene);
@@ -42,35 +25,10 @@ public class HelloApplication extends Application {
         });
         stage.show();
 
-
-//        Platform.runLater(() ->{
-//            SongListManager.importList();
-//            SongListManager.addAfterImport();
-//        });
-
-        Task<Void> panelTask = new Task<Void>() {
+        Task<Void> panelTask = new Task<>() {
             @Override
-            protected Void call() throws Exception {
+            protected Void call(){
                 SongListManager.getOnlineAudioList();
-
-//                List<String> urlList = AWSS3Handle.getAudioUrlList();
-//
-//
-//
-//                for(String url : urlList){
-//                    new Thread(() -> {
-//                        SongData songData = new SongData(url);
-//                        songData.init1();
-////                        songDataList.add(songData);
-//                        in.add(1);
-////                        Init.homePane.addSong(new SongCard(songData, 0));
-//                    }).start();
-//
-////            SongData songData = new SongData(url);
-////            songData.init1();
-////            songDataList.add(songData);
-//                }
-//                Thread.sleep(500);
                 return null;
             }
 

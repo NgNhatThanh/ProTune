@@ -8,6 +8,7 @@ import java.io.File;
 
 public class CardButton extends Label {
     public CardButton(String iconPath){
+        this.setVisible(false);
         ImageView icon = new ImageView(new Image(new File(iconPath).toURI().toString()));
 
         this.setGraphic(icon);

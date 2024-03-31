@@ -29,15 +29,20 @@ public class Test extends Application {
 //        tag.setField(FieldKey.TITLE, "dep trai");
 //        f.commit();
 
-        ImageView imageView = new ImageView(new Image(new File("C:\\Users\\NgThanh\\Downloads\\delete.png").toURI().toString()));
+        ImageView imageView = new ImageView(new Image(new File("C:\\Users\\NgThanh\\Downloads\\anh.jpg").toURI().toString()));
 
+        imageView.setFitHeight(100);
+        imageView.setFitWidth(100);
+        imageView.setPreserveRatio(true);
+
+//        ImageView imageView = new ImageView(new Image(new File("C:\\Users\\NgThanh\\Downloads\\delete.png").toURI().toString()));
+//
         Label lb = new Label();
         lb.setGraphic(imageView);
-        lb.setStyle("-fx-background-radius: 100; -fx-background-color: red; -fx-alignment: center");
         lb.setPrefSize(40, 40);
-        AnchorPane anchorPane = new AnchorPane(imageView);
+        AnchorPane anchorPane = new AnchorPane();
         anchorPane.setPrefSize(100, 100);
-        anchorPane.getChildren().add(lb);
+        anchorPane.getChildren().add(imageView);
 
 
         Scene scene = new Scene(anchorPane, 100, 100);

@@ -61,6 +61,8 @@ public class PlayBar extends FlowPane {
         this.mediaPlayer.play();
     }
 
+    public SongData getPlayingSong(){ return playingSong; }
+
     public void playNext(){
         SongData nextSong = SongListManager.getNextSong(this.playingSong);
         try {
@@ -76,6 +78,14 @@ public class PlayBar extends FlowPane {
             setSongPlay(prevSong);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void reset(){
+        if(this.haveSong){
+            this.mediaPlayer.dispose();
+            this.nowPlayingSong.reset();
+            this.playerZone.reset();
         }
     }
 }

@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import protune.model.Constant;
 import protune.model.SongData;
+import protune.view.in.mainzone.homepane.audiocard.button.CardButtonManage;
 import protune.view.in.mainzone.homepane.audiocard.button.PlayButton;
 
 public class AudioCard extends FlowPane {
@@ -18,11 +19,15 @@ public class AudioCard extends FlowPane {
     private final int id;
     private final SongData songData;
     protected AnchorPane imageZone = new AnchorPane();
-
+    protected CardButtonManage btnManager = new CardButtonManage();
+    protected PlayButton playButton;
+    protected ImageView imageView;
     public AudioCard(SongData songData){
+        playButton = new PlayButton(Constant.cardPlayIconPath, this);
+        btnManager.add(playButton);
         this.id = songData.getId();
         this.songData = songData;
-        ImageView imageView = new ImageView(songData.getThumbnail());
+        imageView = new ImageView(songData.getThumbnail());
         this.getStyleClass().add("song-card");
         imageView.setFitHeight(180);
         imageView.setFitWidth(180);
@@ -40,14 +45,20 @@ public class AudioCard extends FlowPane {
         imageView.setEffect(new DropShadow(20, Color.BLACK));
         imageView.setImage(image);
 
-        imageZone.getChildren().addAll(imageView, new PlayButton(Constant.cardPlayIconPath, this));
+        imageZone.getChildren().addAll(imageView, playButton);
 
         Label songName = new Label(songData.getTitle());
         Label singer = new Label(songData.getArtist());
         songName.setId("song-name");
 
-        this.setOnMouseEntered(e -> this.getStyleClass().add("card-mousein"));
-        this.setOnMouseExited(e -> this.getStyleClass().remove("card-mousein"));
+        this.setOnMouseEntered(e -> {
+            this.getStyleClass().add("card-mousein");
+            btnManager.setVisible(true);
+        });
+        this.setOnMouseExited(e -> {
+            this.getStyleClass().remove("card-mousein");
+            btnManager.setVisible(false);
+        });
         this.getStylesheets().add(getClass().getResource("/stylesheet/songcard.css").toExternalForm());
         this.getChildren().addAll(imageZone, songName, singer);
 

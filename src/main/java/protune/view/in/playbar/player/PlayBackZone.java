@@ -69,4 +69,10 @@ public class PlayBackZone extends FlowPane {
     private String timeFormat(double second){
         return String.format("%02d:%02d", (int)second / 60, (int)second % 60);
     }
+
+    public void reset(){
+        progressBar.setProgress(0);
+        songDuration.setText("00:00");
+        progressBar.setDisable(true);
+    }
 }

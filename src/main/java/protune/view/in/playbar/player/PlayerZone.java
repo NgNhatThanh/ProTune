@@ -1,7 +1,6 @@
 package protune.view.in.playbar.player;
 
 import javafx.scene.layout.FlowPane;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import protune.view.in.playbar.player.control.ControlZone;
 
@@ -16,5 +15,10 @@ public class PlayerZone extends FlowPane {
     public void setSongPlay(MediaPlayer mediaPlayer){
         controlZone.init();
         playBackZone.setMedia(mediaPlayer);
+    }
+
+    public void reset(){
+        playBackZone.reset();
+        controlZone.init();;
     }
 }
