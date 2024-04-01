@@ -9,7 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import protune.model.SongData;
+import protune.model.AudioData;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -45,9 +45,9 @@ public class NowPlayingSong extends FlowPane {
         this.getChildren().addAll( imageView, songInfo);
     }
 
-    public void setSong(SongData songData){
+    public void setSong(AudioData audioData){
         imageView.setVisible(true);
-        imageView.setImage(songData.getThumbnail());
+        imageView.setImage(audioData.getThumbnail());
 
         Rectangle rectangle = new Rectangle(80, 80);
         rectangle.setArcHeight(20);
@@ -60,8 +60,8 @@ public class NowPlayingSong extends FlowPane {
 
         imageView.setImage(image);
 
-        title.setText(songData.getTitle());
-        artist.setText(songData.getArtist());
+        title.setText(audioData.getTitle());
+        artist.setText(audioData.getArtist());
     }
 
     public void reset(){

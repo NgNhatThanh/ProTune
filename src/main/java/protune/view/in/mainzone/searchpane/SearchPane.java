@@ -1,6 +1,7 @@
 package protune.view.in.mainzone.searchpane;
 
 import javafx.scene.layout.VBox;
+import protune.model.AudioData;
 import protune.view.in.mainzone.homepane.audiocard.AudioCard;
 
 public class SearchPane extends VBox {
@@ -17,5 +18,9 @@ public class SearchPane extends VBox {
 
     public void del(AudioCard audioCard){
         searchResultPane.del(audioCard);
+    }
+
+    public void editCard(AudioData audioData){
+        searchResultPane.editCard(audioData);
     }
 }

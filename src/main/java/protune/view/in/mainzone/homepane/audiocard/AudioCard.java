@@ -10,24 +10,24 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import protune.model.Constant;
-import protune.model.SongData;
+import protune.model.AudioData;
 import protune.view.in.mainzone.homepane.audiocard.button.CardButtonManage;
 import protune.view.in.mainzone.homepane.audiocard.button.PlayButton;
 
 public class AudioCard extends FlowPane {
 
     private final int id;
-    private final SongData songData;
+    private final AudioData audioData;
     protected AnchorPane imageZone = new AnchorPane();
     protected CardButtonManage btnManager = new CardButtonManage();
     protected PlayButton playButton;
     protected ImageView imageView;
-    public AudioCard(SongData songData){
+    public AudioCard(AudioData audioData){
         playButton = new PlayButton(Constant.cardPlayIconPath, this);
         btnManager.add(playButton);
-        this.id = songData.getId();
-        this.songData = songData;
-        imageView = new ImageView(songData.getThumbnail());
+        this.id = audioData.getId();
+        this.audioData = audioData;
+        imageView = new ImageView(audioData.getThumbnail());
         this.getStyleClass().add("song-card");
         imageView.setFitHeight(180);
         imageView.setFitWidth(180);
@@ -47,8 +47,8 @@ public class AudioCard extends FlowPane {
 
         imageZone.getChildren().addAll(imageView, playButton);
 
-        Label songName = new Label(songData.getTitle());
-        Label singer = new Label(songData.getArtist());
+        Label songName = new Label(audioData.getTitle());
+        Label singer = new Label(audioData.getArtist());
         songName.setId("song-name");
 
         this.setOnMouseEntered(e -> {
@@ -64,7 +64,9 @@ public class AudioCard extends FlowPane {
 
     }
 
-    public SongData getdata(){ return songData; }
+    public AudioData getdata(){ return audioData; }
+
+    public int getid(){ return id; }
 
     public boolean equal(AudioCard other){
         return this.id == other.id;

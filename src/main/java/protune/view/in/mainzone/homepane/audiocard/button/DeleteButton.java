@@ -15,7 +15,7 @@ public class DeleteButton extends CardButton{
             Init.searchPane.del(audioCard);
             Init.homePane.del(audioCard);
             Init.localPane.del(audioCard);
-            if(Init.playBar.getPlayingSong().equals(audioCard.getdata())) Init.playBar.reset();
+            if(Init.playBar.isHaveSong() && Init.playBar.getPlayingSong().equals(audioCard.getdata())) Init.playBar.reset();
         });
     }
 }

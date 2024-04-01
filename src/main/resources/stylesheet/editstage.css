@@ -1,0 +1,14 @@
+.label{
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+    -fx-pref-height: 60;
+    -fx-pref-width: 60;
+    -fx-alignment: center;
+}
+
+.text-field{
+    -fx-pref-width: 500;
+    -fx-pref-height: 30;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}

@@ -11,7 +11,6 @@ import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 import org.jaudiotagger.tag.images.Artwork;
-import protune.HelloApplication;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -19,7 +18,7 @@ import java.net.URL;
 import java.text.Normalizer;
 import java.util.regex.Pattern;
 
-public class SongData implements Serializable {
+public class AudioData implements Serializable {
     private transient Media media;
     private transient Image thumbnail;
 
@@ -32,18 +31,18 @@ public class SongData implements Serializable {
     public int getId(){ return id; }
 
     public boolean isLocal(){ return local; }
-    public SongData(File file){
+    public AudioData(File file){
         local = true;
         id = hashCode();
         this.audioFile = file;
         try {
             this.extractMetadata();
-        } catch (InvalidAudioFrameException e) {
+        } catch (InvalidAudioFrameException | IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public SongData(String url){
+    public AudioData(String url){
         id = hashCode();
         try {
             this.url = new URL(url);
@@ -82,12 +81,11 @@ public class SongData implements Serializable {
         }
     }
 
-    public void init() throws InvalidAudioFrameException{
+    public void init() throws InvalidAudioFrameException, IOException{
         extractMetadata();
     }
 
-    private void extractMetadata() throws InvalidAudioFrameException{
-        System.out.println(HelloApplication.cnt++);
+    public void extractMetadata() throws InvalidAudioFrameException, IOException{
         AudioFile f;
         try{
             if(this.audioFile == null){
@@ -122,7 +120,7 @@ public class SongData implements Serializable {
             }
             System.out.println("oke");
         }
-        catch (TagException | CannotReadException | ReadOnlyFileException | IOException e) {
+        catch (TagException | CannotReadException | ReadOnlyFileException e) {
             System.out.println("loi");
             throw new RuntimeException(e);
         }
@@ -134,7 +132,8 @@ public class SongData implements Serializable {
 
     public File getAudioFile(){ return audioFile; }
 
-    public boolean isSamePath(SongData songData){
-        return this.audioFile.getPath().equals(songData.audioFile.getPath());
+
+    public boolean isSamePath(AudioData audioData){
+        return this.audioFile.getPath().equals(audioData.audioFile.getPath());
     }
 }

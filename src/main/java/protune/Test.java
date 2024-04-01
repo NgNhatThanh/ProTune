@@ -1,14 +1,10 @@
 package protune;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Test extends Application {
@@ -29,24 +25,35 @@ public class Test extends Application {
 //        tag.setField(FieldKey.TITLE, "dep trai");
 //        f.commit();
 
-        ImageView imageView = new ImageView(new Image(new File("C:\\Users\\NgThanh\\Downloads\\anh.jpg").toURI().toString()));
 
-        imageView.setFitHeight(100);
-        imageView.setFitWidth(100);
-        imageView.setPreserveRatio(true);
+        List<Integer> l = new ArrayList<>();
+        l.add(1);
+        l.add(2);
+        l.add(3);
+        l.add(4);
+        l.add(5);
 
-//        ImageView imageView = new ImageView(new Image(new File("C:\\Users\\NgThanh\\Downloads\\delete.png").toURI().toString()));
+        for(Integer integer : l){
+            integer = 5;
+        }
+
+        for(Integer i : l ) System.out.println(i);
+
+//        ImageView imageView = new ImageView(new Image(new File("C:\\Users\\NgThanh\\Downloads\\anh.jpg").toURI().toString()));
 //
-        Label lb = new Label();
-        lb.setGraphic(imageView);
-        lb.setPrefSize(40, 40);
-        AnchorPane anchorPane = new AnchorPane();
-        anchorPane.setPrefSize(100, 100);
-        anchorPane.getChildren().add(imageView);
-
-
-        Scene scene = new Scene(anchorPane, 100, 100);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+//        imageView.setFitHeight(100);
+//        imageView.setFitWidth(100);
+//        imageView.setPreserveRatio(true);
+//
+//        Label lb = new Label();
+//        lb.setGraphic(imageView);
+//        lb.setPrefSize(40, 40);
+//        AnchorPane anchorPane = new AnchorPane();
+//        anchorPane.setPrefSize(100, 100);
+//        anchorPane.getChildren().add(imageView);
+//
+//        Scene scene = new Scene(anchorPane, 100, 100);
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
     }
 }

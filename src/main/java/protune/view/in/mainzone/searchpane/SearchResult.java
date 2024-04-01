@@ -1,7 +1,7 @@
 package protune.view.in.mainzone.searchpane;
 
 import protune.controller.inapp.SongListManager;
-import protune.model.SongData;
+import protune.model.AudioData;
 import protune.view.in.mainzone.homepane.HomePane;
 import protune.view.in.mainzone.homepane.audiocard.AudioCard;
 import protune.view.in.mainzone.homepane.audiocard.LocalAudioCard;
@@ -21,10 +21,10 @@ public class SearchResult extends HomePane {
 
     public void displayResult(String key){
         inside.getChildren().clear();
-        List<SongData> result = SongListManager.findByKey(key);
-        for(SongData songData : result){
-            if(songData.isLocal()) inside.getChildren().add(new LocalAudioCard(songData));
-            else inside.getChildren().add(new AudioCard(songData));
+        List<AudioData> result = SongListManager.findByKey(key);
+        for(AudioData audioData : result){
+            if(audioData.isLocal()) inside.getChildren().add(new LocalAudioCard(audioData));
+            else inside.getChildren().add(new AudioCard(audioData));
         }
     }
 }

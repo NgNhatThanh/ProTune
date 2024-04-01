@@ -4,7 +4,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import protune.controller.inapp.SongListManager;
-import protune.model.SongData;
+import protune.model.AudioData;
 import protune.view.in.playbar.nowplaying.NowPlayingSong;
 import protune.view.in.playbar.player.PlayerZone;
 import protune.view.in.playbar.volume.VolumeBar;
@@ -17,7 +17,7 @@ public class PlayBar extends FlowPane {
     VolumeBar volumeBar = new VolumeBar();
     Media media;
     MediaPlayer mediaPlayer;
-    SongData playingSong;
+    AudioData playingSong;
     private boolean playing = false;
     private boolean haveSong = false;
     public PlayBar(){
@@ -30,17 +30,17 @@ public class PlayBar extends FlowPane {
         this.getChildren().addAll(nowPlayingSong, playerZone, volumeBar);
     }
 
-    public void setSongPlay(SongData songData) throws FileNotFoundException {
-        if(this.playingSong != null && this.playingSong == songData) return;
+    public void setSongPlay(AudioData audioData) throws FileNotFoundException {
+        if(this.playingSong != null && this.playingSong == audioData) return;
         if(this.mediaPlayer != null) this.mediaPlayer.dispose();
 
-        songData.prepareToPlay();
-        this.playingSong = songData;
-        this.media = songData.getMedia();
+        audioData.prepareToPlay();
+        this.playingSong = audioData;
+        this.media = audioData.getMedia();
         this.playing = true;
         if(this.mediaPlayer != null) this.mediaPlayer.dispose();
         this.mediaPlayer = new MediaPlayer(this.media);
-        nowPlayingSong.setSong(songData);
+        nowPlayingSong.setSong(audioData);
         playerZone.setSongPlay(this.mediaPlayer);
         volumeBar.setMediaPlayer(this.mediaPlayer);
         this.haveSong = true;
@@ -61,10 +61,10 @@ public class PlayBar extends FlowPane {
         this.mediaPlayer.play();
     }
 
-    public SongData getPlayingSong(){ return playingSong; }
+    public AudioData getPlayingSong(){ return playingSong; }
 
     public void playNext(){
-        SongData nextSong = SongListManager.getNextSong(this.playingSong);
+        AudioData nextSong = SongListManager.getNextSong(this.playingSong);
         try {
             setSongPlay(nextSong);
         } catch (FileNotFoundException e) {
@@ -73,7 +73,7 @@ public class PlayBar extends FlowPane {
     }
 
     public void playPrevious(){
-        SongData prevSong = SongListManager.getPrevSong(this.playingSong);
+        AudioData prevSong = SongListManager.getPrevSong(this.playingSong);
         try {
             setSongPlay(prevSong);
         } catch (FileNotFoundException e) {

@@ -4,13 +4,17 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
+import protune.model.AudioData;
 import protune.view.in.mainzone.homepane.audiocard.AudioCard;
+import protune.view.in.mainzone.homepane.audiocard.LocalAudioCard;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomePane extends ScrollPane {
     protected List<AudioCard> audioCardList = new ArrayList<>();
+
+    static int cnt = 1;
     protected FlowPane inside;
     public HomePane(){
         this.setHbarPolicy(ScrollBarPolicy.NEVER);
@@ -38,6 +42,19 @@ public class HomePane extends ScrollPane {
         for(Node child : inside.getChildren()){
             if(audioCard.equal((AudioCard) child)){
                 inside.getChildren().remove(child);
+                break;
+            }
+        }
+    }
+
+    public void editCard(AudioData audioData){
+        for(int i = 0; i < audioCardList.size(); ++i){
+            if(audioCardList.get(i).getid() == audioData.getId()){
+                inside.getChildren().remove(audioCardList.get(i));
+                audioCardList.remove(i);
+                LocalAudioCard newCard = new LocalAudioCard(audioData);
+                audioCardList.add(i, newCard);
+                inside.getChildren().add(i,newCard);
                 break;
             }
         }
