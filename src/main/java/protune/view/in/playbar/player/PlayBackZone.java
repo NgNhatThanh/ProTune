@@ -53,6 +53,7 @@ public class PlayBackZone extends FlowPane {
         progressBar.setDisable(false);
         this.mediaPlayer = mediaPlayer;
         this.mediaPlayer.setAutoPlay(true);
+        progressBar.setProgress(0);
         this.mediaPlayer.currentTimeProperty().addListener(observable -> {
             currentDuration = mediaPlayer.currentTimeProperty().getValue().toSeconds();
             timeStamp.setText(timeFormat(currentDuration));

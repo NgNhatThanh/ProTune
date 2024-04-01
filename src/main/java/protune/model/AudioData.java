@@ -101,7 +101,7 @@ public class AudioData implements Serializable {
                 f = AudioFileIO.read(this.audioFile);
                 outputStream.close();
                 inputStream.close();
-                this.audioFile.delete();
+                while(!this.audioFile.delete()){};
             }
             else f = AudioFileIO.read(this.audioFile);
             Tag tag = f.getTag();
