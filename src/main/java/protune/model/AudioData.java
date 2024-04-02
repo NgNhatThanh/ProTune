@@ -26,7 +26,7 @@ public class AudioData implements Serializable {
     private String title;
     private String artist = "null";
     private URL url;
-    private int id;
+    private final int id;
     private boolean local = false;
     public int getId(){ return id; }
 
@@ -101,7 +101,7 @@ public class AudioData implements Serializable {
                 f = AudioFileIO.read(this.audioFile);
                 outputStream.close();
                 inputStream.close();
-                while(!this.audioFile.delete()){};
+                while(!this.audioFile.delete());
             }
             else f = AudioFileIO.read(this.audioFile);
             Tag tag = f.getTag();

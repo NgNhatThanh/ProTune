@@ -47,9 +47,13 @@ public class SignInPane extends AnchorPane {
 //            String message = checker.isValid(newUser);
 //
 //            if(message.equals("accept")){
-//
-//            }
 
+//            }
+//            try {
+//                SongListManager.importLocalAudio();
+//            } catch (IOException | ClassNotFoundException | InvalidAudioFrameException ex) {
+//                throw new RuntimeException(ex);
+//            }
             Init.appStage.setScene(Init.inAppScene);
         });
 

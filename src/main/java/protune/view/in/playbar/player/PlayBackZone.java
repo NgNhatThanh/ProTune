@@ -8,6 +8,8 @@ import javafx.util.Duration;
 import protune.Init;
 import protune.view.in.playbar.MyProgressBar;
 
+import java.io.FileNotFoundException;
+
 public class PlayBackZone extends FlowPane {
     Label timeStamp, songDuration;
     MyProgressBar progressBar;
@@ -59,7 +61,13 @@ public class PlayBackZone extends FlowPane {
             timeStamp.setText(timeFormat(currentDuration));
             if(autoSet) progressBar.setProgress(currentDuration / totalDuration);
         });
-        mediaPlayer.setOnEndOfMedia(() -> Init.playBar.playNext());
+        mediaPlayer.setOnEndOfMedia(() -> {
+            try {
+                Init.playBar.processWhenEndAudio();
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
         mediaPlayer.setOnReady(() -> {
             totalDuration = this.mediaPlayer.getMedia().getDuration().toSeconds();
             songDuration.setText(timeFormat(totalDuration));

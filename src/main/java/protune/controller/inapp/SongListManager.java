@@ -11,6 +11,7 @@ import protune.view.in.mainzone.homepane.audiocard.LocalAudioCard;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class SongListManager {
     private static List<AudioData> localSDList = new ArrayList<>();
@@ -29,6 +30,7 @@ public class SongListManager {
     public static void getOnlineAudioList(){
         urlList = AWSS3Handle.getAudioUrlList();
         onlineAudioCount = urlList.size();
+        System.out.println(onlineAudioCount);
         for(String url : urlList){
             new Thread(() -> {
                 AudioData audioData = new AudioData(url);
@@ -41,7 +43,22 @@ public class SongListManager {
                 }
 
             }).start();
+
+//            AudioData audioData = new AudioData(url);
+//
+//            try {
+//                audioData.init();
+//                homeSDList.add(audioData);
+//            } catch (InvalidAudioFrameException | IOException e) {
+//                throw new RuntimeException(e);
+//            }
         }
+
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     public static void importLocalAudio() throws ClassNotFoundException, InvalidAudioFrameException, IOException {
@@ -60,6 +77,7 @@ public class SongListManager {
 
     public static void addOnlineAudio(){
         while(homeSDList.size() < onlineAudioCount) System.out.print("");
+//        while(homeSDList.size() < 10) System.out.print("");
         for(AudioData audioData : homeSDList){
             Init.homePane.addSong(new AudioCard(audioData));
         }
@@ -69,15 +87,23 @@ public class SongListManager {
         FileIOSystem.write(SongListManager.getLocalList(), "src/main/data/songlist.bin");
     }
 
-    public static AudioData getNextSong(AudioData currentSong){
-        int idx = find(currentSong);
-        if(idx == homeSDList.size() - 1) return currentSong;
+    public static AudioData getRandomAudio(AudioData currentAudio){
+        Random rnd = new Random();
+        int curr = find(currentAudio);
+        int rand = curr;
+        while(rand == curr) rand = rnd.nextInt(homeSDList.size());
+        return homeSDList.get(rand);
+    }
+
+    public static AudioData getNextSong(AudioData currentAudio){
+        int idx = find(currentAudio);
+        if(idx == homeSDList.size() - 1) return currentAudio;
         return homeSDList.get(idx + 1);
     }
 
-    public static AudioData getPrevSong(AudioData currentSong){
-        int idx = find(currentSong);
-        if(idx == 0) return currentSong;
+    public static AudioData getPrevSong(AudioData currentAudio){
+        int idx = find(currentAudio);
+        if(idx == 0) return currentAudio;
         return homeSDList.get(idx-  1);
     }
 

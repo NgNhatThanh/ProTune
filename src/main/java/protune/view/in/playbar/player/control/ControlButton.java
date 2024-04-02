@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 public class ControlButton extends Label {
     protected Image icon;
     public ControlButton(String iconPath){
-        this.setPrefSize(35, 35);
+        this.setPrefSize(40, 35);
         this.setIcon(iconPath);
         this.getStyleClass().add("control-label");
     }

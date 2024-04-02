@@ -3,6 +3,7 @@ package protune.view.in.playbar;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import protune.controller.inapp.SongListManager;
 import protune.model.AudioData;
 import protune.view.in.playbar.nowplaying.NowPlayingSong;
@@ -18,6 +19,9 @@ public class PlayBar extends FlowPane {
     Media media;
     MediaPlayer mediaPlayer;
     AudioData playingSong;
+    boolean shuffle = false;
+    int repeat = 0;
+    int repeatCount = 0;
     private boolean playing = false;
     private boolean haveSong = false;
     public PlayBar(){
@@ -31,6 +35,12 @@ public class PlayBar extends FlowPane {
     }
 
     public void setSongPlay(AudioData audioData) throws FileNotFoundException {
+        System.out.println(repeatCount);
+        if(repeatCount > 0 && !shuffle){
+            --repeatCount;
+            this.mediaPlayer.seek(Duration.ZERO);
+            return;
+        }
         if(this.playingSong != null && this.playingSong == audioData) return;
         if(this.mediaPlayer != null) this.mediaPlayer.dispose();
 
@@ -62,6 +72,38 @@ public class PlayBar extends FlowPane {
     }
 
     public AudioData getPlayingSong(){ return playingSong; }
+
+    public void setShuffle(boolean shuffle){ this.shuffle = shuffle; }
+
+    public void setRepeat(int repeat){
+        this.repeat = repeat;
+        repeatCount = repeat;
+    }
+
+    public void processWhenEndAudio() throws FileNotFoundException {
+        if(shuffle){
+            playRandom();
+        }
+        else{
+            if(repeatCount > 0){
+                 setSongPlay(this.playingSong);
+            }
+            else{
+                System.out.println("playnexr");
+                playNext();
+                repeatCount = repeat;
+            }
+        }
+    }
+
+    public void playRandom(){
+        AudioData nextSong = SongListManager.getRandomAudio(this.playingSong);
+        try {
+            setSongPlay(nextSong);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void playNext(){
         AudioData nextSong = SongListManager.getNextSong(this.playingSong);

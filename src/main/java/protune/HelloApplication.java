@@ -14,17 +14,9 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage){
         stage = Init.appStage;
+//        Stage finalStage = stage;
+
         long starttime = System.currentTimeMillis();
-
-        stage.setTitle("Hello!");
-        stage.setScene(Init.logScene);
-        stage.setResizable(false);
-        stage.setOnHidden(e -> {
-            SongListManager.exportLocalList();
-            System.exit(0);
-        });
-        stage.show();
-
         Task<Void> panelTask = new Task<>() {
             @Override
             protected Void call(){
@@ -43,12 +35,26 @@ public class HelloApplication extends Application {
                 } catch (IOException | ClassNotFoundException | InvalidAudioFrameException e) {
                     throw new RuntimeException(e);
                 }
+//                finalStage.show();
             }
 
         };
 
         var t = new Thread(panelTask);
         t.start();
+
+        stage = Init.appStage;
+
+        stage.setTitle("Hello!");
+        stage.setScene(Init.logScene);
+        stage.setResizable(false);
+        stage.setOnHidden(e -> {
+            SongListManager.exportLocalList();
+            System.exit(0);
+        });
+        stage.show();
+
+
 
     }
 

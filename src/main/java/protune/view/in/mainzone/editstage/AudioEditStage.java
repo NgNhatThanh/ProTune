@@ -1,5 +1,8 @@
 package protune.view.in.mainzone.editstage;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -43,9 +46,13 @@ public class AudioEditStage extends Stage {
         }
         Tag tag = f.getTag();
 
-        FlowPane flowPane = new FlowPane();
+
+
+        FlowPane mainPain = new FlowPane();
+        mainPain.setOrientation(Orientation.VERTICAL);
+
         Label l1 = new Label("Cover\nimage");
-        Label l2 = new Label("Audio\nTitle");
+        Label l2 = new Label("Audio title");
         Label l3 = new Label("Artist");
 
         imageZone = new Label();
@@ -62,6 +69,9 @@ public class AudioEditStage extends Stage {
         chooseImgBtn.setOnAction(e -> {
             chooseImg();
         });
+
+        FlowPane imagePane = new FlowPane(l1, imageZone, chooseImgBtn);
+        imagePane.setHgap(15);
 
         TextField title = new TextField(tag.getFirst(FieldKey.TITLE));
         TextField artist = new TextField(tag.getFirst(FieldKey.ARTIST));
@@ -115,13 +125,19 @@ public class AudioEditStage extends Stage {
 
             this.close();
         });
+        saveBtn.setPrefSize(80, 40);
 
-        flowPane.setHgap(15);
-        flowPane.getChildren().addAll(l1, imageZone, chooseImgBtn, l2, title, l3, artist, saveBtn);
+        FlowPane btnPane = new FlowPane(saveBtn);
+        btnPane.setAlignment(Pos.BASELINE_RIGHT);
 
-        Scene scene = new Scene(flowPane, 510, 400);
+        mainPain.setVgap(15);
+        mainPain.setPadding(new Insets(10));
+        mainPain.getChildren().addAll(imagePane, l2, title, l3, artist, btnPane);
+
+        Scene scene = new Scene(mainPain, 520, 435);
         scene.getStylesheets().add(getClass().getResource("/stylesheet/editstage.css").toExternalForm());
         this.setScene(scene);
+        this.setResizable(false);
         this.show();
     }
 

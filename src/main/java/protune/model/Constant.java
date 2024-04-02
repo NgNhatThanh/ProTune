@@ -3,6 +3,7 @@ package protune.model;
 public class Constant {
     static public final int appHeight = 600; // min: 600
     static public final int appWidth = 1000; // min: 1000
+    static public final int INF = 2000000000;
     static public final String githubLink = "https://github.com/NgNhatThanh";
     static public final String facebookLink = "https://www.facebook.com/cnttgobrr1/";
     static public final String githubIconPath = "src/main/resources/img/github.png";
@@ -15,8 +16,11 @@ public class Constant {
     static public final String pauseIconPath = "src/main/resources/img/pause.png";
     static public final String nextIconPath = "src/main/resources/img/next.png";
     static public final String previousIconPath = "src/main/resources/img/previous.png";
-    static public final String repeatIconPath = "src/main/resources/img/repeat.png";
-    static public final String shuffleIconPath = "src/main/resources/img/shuffle.png";
+    static public final String repeatOnIconPath = "src/main/resources/img/repeat_on.png";
+    static public final String repeatOffIconPath = "src/main/resources/img/repeat_off.png";
+    static public final String repeatOnceIconPath = "src/main/resources/img/repeat_once.png";
+    static public final String shuffleOffIconPath = "src/main/resources/img/shuffle_off.png";
+    static public final String shuffleOnIconPath = "src/main/resources/img/shuffle_on.png";
     static public final String volumeIconPath = "src/main/resources/img/volume.png";
     static public final String deleteIconPath = "src/main/resources/img/delete.png";
     static public final String cardPlayIconPath = "src/main/resources/img/play-btn.png";
