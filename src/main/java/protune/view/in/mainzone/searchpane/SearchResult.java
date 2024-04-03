@@ -25,6 +25,7 @@ public class SearchResult extends HomePane {
         for(AudioData audioData : result){
             if(audioData.isLocal()) inside.getChildren().add(new LocalAudioCard(audioData));
             else inside.getChildren().add(new AudioCard(audioData));
+            audioCardList.add((AudioCard) inside.getChildren().getLast());
         }
     }
 }

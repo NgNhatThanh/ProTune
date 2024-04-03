@@ -16,7 +16,7 @@ import protune.view.in.mainzone.homepane.audiocard.button.PlayButton;
 
 public class AudioCard extends FlowPane {
 
-    private final int id;
+    private String ID;
     private final AudioData audioData;
     protected AnchorPane imageZone = new AnchorPane();
     protected CardButtonManage btnManager = new CardButtonManage();
@@ -25,7 +25,8 @@ public class AudioCard extends FlowPane {
     public AudioCard(AudioData audioData){
         playButton = new PlayButton(Constant.cardPlayIconPath, this);
         btnManager.add(playButton);
-        this.id = audioData.getId();
+        this.ID = audioData.getID();
+//        System.out.println("ID: " + this.ID + " " + audioData.getID());
         this.audioData = audioData;
         imageView = new ImageView(audioData.getThumbnail());
         this.getStyleClass().add("song-card");
@@ -66,9 +67,9 @@ public class AudioCard extends FlowPane {
 
     public AudioData getdata(){ return audioData; }
 
-    public int getid(){ return id; }
+    public String getID(){ return ID; }
 
     public boolean equal(AudioCard other){
-        return this.id == other.id;
+        return this.ID.equals(other.ID);
     }
 }

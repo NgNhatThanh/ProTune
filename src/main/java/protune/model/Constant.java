@@ -4,6 +4,7 @@ public class Constant {
     static public final int appHeight = 600; // min: 600
     static public final int appWidth = 1000; // min: 1000
     static public final int INF = 2000000000;
+    static public final int AudioIDLength = 10;
     static public final String githubLink = "https://github.com/NgNhatThanh";
     static public final String facebookLink = "https://www.facebook.com/cnttgobrr1/";
     static public final String githubIconPath = "src/main/resources/img/github.png";

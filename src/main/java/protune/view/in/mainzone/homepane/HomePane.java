@@ -49,7 +49,9 @@ public class HomePane extends ScrollPane {
 
     public void editCard(AudioData audioData){
         for(int i = 0; i < audioCardList.size(); ++i){
-            if(audioCardList.get(i).getid() == audioData.getId()){
+            System.out.println(audioCardList.get(i).getID() + " " + audioData.getID());
+            if(audioCardList.get(i).getID().equals(audioData.getID())){
+                System.out.println("found");
                 inside.getChildren().remove(audioCardList.get(i));
                 audioCardList.remove(i);
                 LocalAudioCard newCard = new LocalAudioCard(audioData);

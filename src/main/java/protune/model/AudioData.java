@@ -5,12 +5,14 @@ import javafx.scene.media.Media;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.exceptions.CannotReadException;
+import org.jaudiotagger.audio.exceptions.CannotWriteException;
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 import org.jaudiotagger.tag.images.Artwork;
+import protune.controller.RandomIDGenerator;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -26,14 +28,13 @@ public class AudioData implements Serializable {
     private String title;
     private String artist = "null";
     private URL url;
-    private final int id;
+    private String ID;
     private boolean local = false;
-    public int getId(){ return id; }
+    public String getID(){ return ID; }
 
     public boolean isLocal(){ return local; }
     public AudioData(File file){
         local = true;
-        id = hashCode();
         this.audioFile = file;
         try {
             this.extractMetadata();
@@ -43,7 +44,6 @@ public class AudioData implements Serializable {
     }
 
     public AudioData(String url){
-        id = hashCode();
         try {
             this.url = new URL(url);
         } catch (MalformedURLException e) {
@@ -108,9 +108,20 @@ public class AudioData implements Serializable {
             this.title = tag.getFirst(FieldKey.TITLE);
             if(this.title.isEmpty()) setTitle(audioFile.getName());
             this.artist = tag.getFirst(FieldKey.ARTIST);
-            System.out.println(f.getAudioHeader().getTrackLength());
-            Artwork artwork = tag.getFirstArtwork();
 
+            /*
+                I used Comment tag of file as ID for the file :>
+                That was a little tricky, but I hadn't found any better solution
+             */
+            if(this.url == null && tag.getFirst(FieldKey.COMMENT).length() != Constant.AudioIDLength){
+                this.ID = RandomIDGenerator.gen();
+                tag.deleteField(FieldKey.COMMENT);
+                tag.setField(FieldKey.COMMENT, this.ID);
+                f.commit();
+            }
+            else this.ID = tag.getFirst(FieldKey.COMMENT);
+            System.out.println(this.title + " " + this.ID);
+            Artwork artwork = tag.getFirstArtwork();
             if (artwork != null) {
                 byte[] imageData = artwork.getBinaryData();
                 ByteArrayInputStream bai = new ByteArrayInputStream(imageData);
@@ -122,6 +133,8 @@ public class AudioData implements Serializable {
         }
         catch (TagException | CannotReadException | ReadOnlyFileException e) {
             System.out.println("loi");
+            throw new RuntimeException(e);
+        } catch (CannotWriteException e) {
             throw new RuntimeException(e);
         }
     }

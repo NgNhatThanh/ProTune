@@ -32,33 +32,33 @@ public class SongListManager {
         onlineAudioCount = urlList.size();
         System.out.println(onlineAudioCount);
         for(String url : urlList){
-            new Thread(() -> {
-                AudioData audioData = new AudioData(url);
-
-                try {
-                    audioData.init();
-                    homeSDList.add(audioData);
-                } catch (InvalidAudioFrameException | IOException e) {
-                    throw new RuntimeException(e);
-                }
-
-            }).start();
-
-//            AudioData audioData = new AudioData(url);
+//            new Thread(() -> {
+//                AudioData audioData = new AudioData(url);
 //
-//            try {
-//                audioData.init();
-//                homeSDList.add(audioData);
-//            } catch (InvalidAudioFrameException | IOException e) {
-//                throw new RuntimeException(e);
-//            }
+//                try {
+//                    audioData.init();
+//                    homeSDList.add(audioData);
+//                } catch (InvalidAudioFrameException | IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//
+//            }).start();
+
+            AudioData audioData = new AudioData(url);
+
+            try {
+                audioData.init();
+                homeSDList.add(audioData);
+            } catch (InvalidAudioFrameException | IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void importLocalAudio() throws ClassNotFoundException, InvalidAudioFrameException, IOException {
