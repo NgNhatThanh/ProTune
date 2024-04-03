@@ -8,6 +8,8 @@ public class UserData {
 
     private File listSongPath;
 
+    private String role;
+
     public UserData(){
         listSongPath = new File("src/main/data/usersong" + username + ".bin");
         try {

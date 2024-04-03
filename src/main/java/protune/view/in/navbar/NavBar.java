@@ -1,10 +1,7 @@
 package protune.view.in.navbar;
 
 import javafx.geometry.Orientation;
-import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import protune.model.Constant;
 import protune.view.in.navbar.item.*;
 
@@ -28,10 +25,8 @@ public class NavBar extends ToolBar {
 
         this.getStylesheets().add(getClass().getResource("/stylesheet/inapp.css").toExternalForm());
         this.getItems().addAll(itemList);
-    }
+        this.getItems().add(new PlayListItem());
 
-    private void setIcon(Label label, Image icon){
-        ImageView imageView = new ImageView(icon);
-        label.setGraphic(imageView);
+        this.getItems().add(new ExitItem(Constant.exitIconPath, "Log out"));
     }
 }

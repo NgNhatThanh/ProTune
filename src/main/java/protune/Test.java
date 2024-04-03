@@ -2,6 +2,7 @@ package protune;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import protune.view.out.WaitStage;
 
 
 public class Test extends Application {
@@ -11,7 +12,8 @@ public class Test extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        WaitStage waitStage = new WaitStage();
+        waitStage.show();
 
 
 //        ImageView imageView = new ImageView(new Image(new File("C:\\Users\\NgThanh\\Downloads\\anh.jpg").toURI().toString()));

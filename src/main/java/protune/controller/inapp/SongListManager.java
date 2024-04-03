@@ -62,7 +62,7 @@ public class SongListManager {
     }
 
     public static void importLocalAudio() throws ClassNotFoundException, InvalidAudioFrameException, IOException {
-        localSDList = FileIOSystem.read("src/main/data/songlist.bin");
+        localSDList = FileIOSystem.read("src/main/data/locallist.bin");
         for(int i = 0; i < localSDList.size(); ++i){
             try {
                 localSDList.get(i).init();
@@ -84,7 +84,7 @@ public class SongListManager {
     }
 
     public static void exportLocalList(){
-        FileIOSystem.write(SongListManager.getLocalList(), "src/main/data/songlist.bin");
+        FileIOSystem.write(SongListManager.getLocalList(), "src/main/data/locallist.bin");
     }
 
     public static AudioData getRandomAudio(AudioData currentAudio){

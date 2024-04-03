@@ -89,7 +89,6 @@ public class PlayBar extends FlowPane {
                  setSongPlay(this.playingSong);
             }
             else{
-                System.out.println("playnexr");
                 playNext();
                 repeatCount = repeat;
             }
@@ -106,20 +105,26 @@ public class PlayBar extends FlowPane {
     }
 
     public void playNext(){
-        AudioData nextSong = SongListManager.getNextSong(this.playingSong);
-        try {
-            setSongPlay(nextSong);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+        if(shuffle) playRandom();
+        else{
+            AudioData nextSong = SongListManager.getNextSong(this.playingSong);
+            try {
+                setSongPlay(nextSong);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
     public void playPrevious(){
-        AudioData prevSong = SongListManager.getPrevSong(this.playingSong);
-        try {
-            setSongPlay(prevSong);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+        if(shuffle) playRandom();
+        else{
+            AudioData prevSong = SongListManager.getPrevSong(this.playingSong);
+            try {
+                setSongPlay(prevSong);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

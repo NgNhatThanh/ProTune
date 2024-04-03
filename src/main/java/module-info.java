@@ -1,7 +1,6 @@
 module protune {
     requires javafx.controls;
     requires javafx.media;
-    requires org.kordamp.bootstrapfx.core;
     requires java.desktop;
     requires jaudiotagger;
     requires software.amazon.awssdk.auth;

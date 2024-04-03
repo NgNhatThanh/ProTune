@@ -21,6 +21,7 @@ public class SignInPane extends AnchorPane {
         TextField usernameField = new TextField();
         usernameField.setPromptText("Username");
 
+
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Password");
         passwordField.setLayoutY(100);
@@ -28,6 +29,14 @@ public class SignInPane extends AnchorPane {
         Button signinBtn = new Button("Sign in");
         signinBtn.setLayoutX(200);
         signinBtn.setLayoutY(200);
+
+        
+
+        usernameField.setOnInputMethodTextChanged(event -> {
+            signinBtn.setDisable(usernameField.getText().isEmpty());
+            if(usernameField.getText().isEmpty()) System.out.println("trong");
+        });
+
 
         Label lb = new Label("No account yet?");
         lb.setId("recom-label");
@@ -38,9 +47,15 @@ public class SignInPane extends AnchorPane {
             paneSwitch.setVisible(true);
         });
 
+        Label guestLabel = new Label("Enter as guest.");
+        guestLabel.setLayoutY(260);
+        guestLabel.setId("sign-label");
+        guestLabel.setOnMouseClicked(e -> Init.appStage.setScene(Init.inAppScene));
+
         lb.setLayoutY(220);
         lb2.setLayoutY(217);
         lb2.setLayoutX(110);
+
 
         signinBtn.setOnAction(e -> {
 //            UserData newUser = new UserData(usernameField.getText(), passwordField.getText());
@@ -54,10 +69,9 @@ public class SignInPane extends AnchorPane {
 //            } catch (IOException | ClassNotFoundException | InvalidAudioFrameException ex) {
 //                throw new RuntimeException(ex);
 //            }
-            Init.appStage.setScene(Init.inAppScene);
         });
 
-        this.getChildren().addAll(usernameField, passwordField, signinBtn, lb, lb2);
+        this.getChildren().addAll(usernameField, passwordField, signinBtn, lb, lb2, guestLabel);
     }
 
     public void setPaneSwitch(SignUpPane signUpPane){
