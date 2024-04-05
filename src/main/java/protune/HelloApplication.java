@@ -5,16 +5,20 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.stage.Stage;
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
+import protune.controller.PlaylistManager;
+import protune.controller.auth.Authorization;
+import protune.controller.auth.UserManager;
 import protune.controller.inapp.SongListManager;
 import protune.view.out.WaitStage;
 
 import java.io.IOException;
 
 public class HelloApplication extends Application {
-    public static int cnt = 1;
     WaitStage waitStage = new WaitStage();
     @Override
-    public void start(Stage stage){
+    public void start(Stage stage) throws IOException, ClassNotFoundException {
+        UserManager.importList();
+
         stage = Init.appStage;
         Stage finalStage = stage;
 
@@ -23,6 +27,8 @@ public class HelloApplication extends Application {
         stage.setResizable(false);
         stage.setOnHidden(e -> {
             SongListManager.exportLocalList();
+            UserManager.exportList();
+            if(Authorization.isAccount()) PlaylistManager.exportPlaylists();
             System.exit(0);
         });
 

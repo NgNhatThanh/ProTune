@@ -2,14 +2,18 @@ package protune.view.in.navbar;
 
 import javafx.geometry.Orientation;
 import javafx.scene.control.ToolBar;
+import protune.controller.auth.Authorization;
 import protune.model.Constant;
 import protune.view.in.navbar.item.*;
+import protune.view.in.navbar.playlist.PlayListBar;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NavBar extends ToolBar {
+
+    PlayListBar playListBar = new PlayListBar();
     public NavBar() throws FileNotFoundException {
         this.setOrientation(Orientation.VERTICAL);
         this.setPrefSize(230, 480);
@@ -22,11 +26,22 @@ public class NavBar extends ToolBar {
         itemList.add(new SearchItem(Constant.searchIconPath, "Search"));
         itemList.add(new AddSongItem(Constant.uploadIconPath, "Add song"));
         itemList.add(new MyLocalItem(Constant.localIconPath, "My local"));
+        itemList.add(new ExitItem(Constant.exitIconPath, "Log out"));
 
         this.getStylesheets().add(getClass().getResource("/stylesheet/inapp.css").toExternalForm());
         this.getItems().addAll(itemList);
-        this.getItems().add(new PlayListItem());
+    }
 
-        this.getItems().add(new ExitItem(Constant.exitIconPath, "Log out"));
+    public void modify(){
+        if(Authorization.isAccount()){
+            this.getItems().remove(playListBar);
+            playListBar.importPlaylists();
+            this.getItems().add(4, playListBar);
+        }
+        else this.getItems().remove(playListBar);
+    }
+
+    public void reset(){
+        this.getItems().remove(playListBar);
     }
 }

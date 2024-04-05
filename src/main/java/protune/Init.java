@@ -1,11 +1,11 @@
 package protune;
 
-import javafx.stage.Stage;
 import protune.controller.inapp.LocalFileAdd;
 import protune.view.in.InAppScene;
 import protune.view.in.mainzone.MainZone;
 import protune.view.in.mainzone.homepane.HomePane;
-import protune.view.in.mainzone.localpane.LocalPane;
+import protune.view.in.mainzone.homepane.audiocard.PlaylistList;
+import protune.view.in.mainzone.homepane.LocalPane;
 import protune.view.in.mainzone.searchpane.SearchPane;
 import protune.view.in.navbar.NavBar;
 import protune.view.in.playbar.PlayBar;
@@ -31,9 +31,11 @@ public class Init {
     static public LocalPane localPane = new LocalPane();
     static public MainZone mainZone = new MainZone();
 
+    static public PlaylistList playlistList = new PlaylistList();
+
     static public LocalFileAdd localFileAdd = new LocalFileAdd();
 
-    static public Stage appStage = new Stage();
+    static public MainStage appStage = new MainStage();
     static public LogScene logScene;
     static {
         try {

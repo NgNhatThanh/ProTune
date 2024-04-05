@@ -28,5 +28,7 @@ public class Constant {
     static public final String editIconPath = "src/main/resources/img/edit.png";
     static public final String playlistIconPath = "src/main/resources/img/playlist.png";
     static public final String exitIconPath = "src/main/resources/img/logout.png";
+    static public final String addIconPath = "src/main/resources/img/add.png";
+    static public final String plDelIconPath = "src/main/resources/img/pldel.png";
     static public final String defaultSongThumbnailPath = "src/main/resources/img/default-thumbnail.png";
 }

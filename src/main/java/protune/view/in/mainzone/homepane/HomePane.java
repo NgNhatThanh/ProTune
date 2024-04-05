@@ -14,7 +14,6 @@ import java.util.List;
 public class HomePane extends ScrollPane {
     protected List<AudioCard> audioCardList = new ArrayList<>();
 
-    static int cnt = 1;
     protected FlowPane inside;
     public HomePane(){
         this.setHbarPolicy(ScrollBarPolicy.NEVER);

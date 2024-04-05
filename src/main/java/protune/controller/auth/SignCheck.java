@@ -1,4 +1,4 @@
-package protune.controller.log;
+package protune.controller.auth;
 
 import protune.model.UserData;
 

@@ -1,6 +1,4 @@
-package protune.view.in.mainzone.localpane;
-
-import protune.view.in.mainzone.homepane.HomePane;
+package protune.view.in.mainzone.homepane;
 
 public class LocalPane extends HomePane {
 //    public LocalPane(){

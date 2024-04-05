@@ -32,37 +32,37 @@ public class SongListManager {
         onlineAudioCount = urlList.size();
         System.out.println(onlineAudioCount);
         for(String url : urlList){
-//            new Thread(() -> {
-//                AudioData audioData = new AudioData(url);
-//
-//                try {
-//                    audioData.init();
-//                    homeSDList.add(audioData);
-//                } catch (InvalidAudioFrameException | IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//
-//            }).start();
+            new Thread(() -> {
+                AudioData audioData = new AudioData(url);
 
-            AudioData audioData = new AudioData(url);
+                try {
+                    audioData.init();
+                    homeSDList.add(audioData);
+                } catch (InvalidAudioFrameException | IOException e) {
+                    throw new RuntimeException(e);
+                }
+//
+            }).start();
 
-            try {
-                audioData.init();
-                homeSDList.add(audioData);
-            } catch (InvalidAudioFrameException | IOException e) {
-                throw new RuntimeException(e);
-            }
+//            AudioData audioData = new AudioData(url);
+//
+//            try {
+//                audioData.init();
+//                homeSDList.add(audioData);
+//            } catch (InvalidAudioFrameException | IOException e) {
+//                throw new RuntimeException(e);
+//            }
         }
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     public static void importLocalAudio() throws ClassNotFoundException, InvalidAudioFrameException, IOException {
-        localSDList = FileIOSystem.read("src/main/data/locallist.bin");
+        localSDList = FileIOSystem.read("src/main/data/guestlocal.bin");
         for(int i = 0; i < localSDList.size(); ++i){
             try {
                 localSDList.get(i).init();
@@ -84,7 +84,7 @@ public class SongListManager {
     }
 
     public static void exportLocalList(){
-        FileIOSystem.write(SongListManager.getLocalList(), "src/main/data/locallist.bin");
+        FileIOSystem.write(SongListManager.getLocalList(), "src/main/data/guestlocal.bin");
     }
 
     public static AudioData getRandomAudio(AudioData currentAudio){

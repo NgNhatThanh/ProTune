@@ -14,4 +14,6 @@ public class CardButtonManage {
         for(CardButton btn : btnList) btn.setVisible(visible);
     }
 
+    public List<CardButton> getBtnList(){ return btnList; }
+
 }

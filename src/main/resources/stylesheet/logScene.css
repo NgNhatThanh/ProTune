@@ -31,3 +31,13 @@
     -fx-font-weight: bold;
     -fx-cursor: hand;
 }
+
+#noti-label{
+    -fx-text-fill: red;
+    -fx-font-size: 15;
+}
+
+#accept-noti-label{
+    -fx-text-fill: green;
+    -fx-font-size: 15;
+}

@@ -1,8 +1,14 @@
 package protune;
 
 import javafx.application.Application;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.scene.Cursor;
+import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import protune.view.out.WaitStage;
+
 
 
 public class Test extends Application {
@@ -12,25 +18,41 @@ public class Test extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        WaitStage waitStage = new WaitStage();
-        waitStage.show();
 
 
-//        ImageView imageView = new ImageView(new Image(new File("C:\\Users\\NgThanh\\Downloads\\anh.jpg").toURI().toString()));
+//        ObservableList<String> l = FXCollections.observableArrayList();
 //
-//        imageView.setFitHeight(100);
-//        imageView.setFitWidth(100);
-//        imageView.setPreserveRatio(true);
-//
-//        Label lb = new Label();
-//        lb.setGraphic(imageView);
-//        lb.setPrefSize(40, 40);
-//        AnchorPane anchorPane = new AnchorPane();
-//        anchorPane.setPrefSize(100, 100);
-//        anchorPane.getChildren().add(imageView);
-//
-//        Scene scene = new Scene(anchorPane, 100, 100);
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
+//        l.addAll("ok2", "ok1", "ok3");
+        ListView<String> listView = new ListView<>();
+        listView.getItems().addAll("oke", "ok1", "oke2", "oke3");
+
+        listView.setFixedCellSize(20);
+        DoubleProperty hei = new SimpleDoubleProperty(listView.getFixedCellSize() * listView.getItems().size());
+
+
+        listView.setCursor(Cursor.HAND);
+        listView.setOnMouseClicked(e -> {
+            String tmp = listView.getSelectionModel().getSelectedItem();
+            System.out.println(tmp);
+            listView.getItems().add("new");
+//            listView.getItems().remove(listView.getSelectionModel().getSelectedItem());
+            hei.add(listView.getFixedCellSize());
+            System.out.println(hei);
+        });
+
+
+//        DoubleProperty hei = new SimpleDoubleProperty(100);
+
+        listView.prefHeightProperty().bind(hei);
+
+
+
+        AnchorPane anchorPane = new AnchorPane();
+//        anchorPane.prefHeightProperty().bind(listView.widthProperty());
+        anchorPane.getChildren().add(listView);
+
+        Scene scene = new Scene(anchorPane, 500, 300);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }

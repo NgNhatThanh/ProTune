@@ -5,9 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import protune.controller.log.SignUpCheck;
+import protune.controller.auth.SignUpCheck;
 import protune.model.UserData;
-import protune.view.out.SignInPane;
 
 public class SignUpPane extends AnchorPane {
     SignInPane paneSwitch;
@@ -34,15 +33,20 @@ public class SignUpPane extends AnchorPane {
         passwordField.setPromptText("Password");
         passwordField.setLayoutY(130);
 
-        Button signinBtn = new Button("Sign up");
-        signinBtn.setLayoutX(200);
-        signinBtn.setLayoutY(200);
+        Button signupBtn = new Button("Sign up");
+        signupBtn.setLayoutX(200);
+        signupBtn.setLayoutY(200);
+
+        Label noti = new Label();
+        noti.setVisible(false);
+        noti.setLayoutY(260);
 
         Label lb = new Label("Already had an account?");
         lb.setId("recom-label");
         Label lb2 = new Label("Sign in");
         lb2.setId("sign-label");
         lb2.setOnMouseClicked(e -> {
+            noti.setVisible(false);
             this.setVisible(false);
             paneSwitch.setVisible(true);
         });
@@ -50,16 +54,26 @@ public class SignUpPane extends AnchorPane {
         lb.setLayoutY(210);
         lb2.setLayoutY(230);
 
-        signinBtn.setOnAction(e -> {
+        signupBtn.setOnAction(e -> {
             UserData newUser = new UserData(firstNameLabel.getText(), lastNameLabel.getText(), usernameField.getText(), passwordField.getText());
             String message = checker.isValid(newUser);
 
-            if(message.equals("accept")){
-
+            if(!message.equals("accept")){
+                noti.setId("noti-label");
+                noti.setText(message);
             }
+            else{
+                firstNameLabel.clear();
+                lastNameLabel.clear();
+                usernameField.clear();
+                passwordField.clear();
+                noti.setId("accept-noti-label");
+                noti.setText("Registration completed!");
+            }
+            noti.setVisible(true);
         });
 
-        this.getChildren().addAll(firstNameLabel, lastNameLabel, usernameField, passwordField, lb, lb2, signinBtn);
+        this.getChildren().addAll(firstNameLabel, lastNameLabel, usernameField, passwordField, noti, lb, lb2, signupBtn);
         this.setVisible(false);
     }
 

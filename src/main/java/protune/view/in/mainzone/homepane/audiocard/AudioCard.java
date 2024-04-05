@@ -9,9 +9,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import protune.model.Constant;
 import protune.model.AudioData;
+import protune.model.Constant;
 import protune.view.in.mainzone.homepane.audiocard.button.CardButtonManage;
+import protune.view.in.mainzone.homepane.audiocard.button.PLAddButton;
 import protune.view.in.mainzone.homepane.audiocard.button.PlayButton;
 
 public class AudioCard extends FlowPane {
@@ -22,11 +23,13 @@ public class AudioCard extends FlowPane {
     protected CardButtonManage btnManager = new CardButtonManage();
     protected PlayButton playButton;
     protected ImageView imageView;
+    protected PLAddButton plAddButton;
     public AudioCard(AudioData audioData){
+        plAddButton = new PLAddButton(Constant.addIconPath, this);
         playButton = new PlayButton(Constant.cardPlayIconPath, this);
         btnManager.add(playButton);
+        btnManager.add(plAddButton);
         this.ID = audioData.getID();
-//        System.out.println("ID: " + this.ID + " " + audioData.getID());
         this.audioData = audioData;
         imageView = new ImageView(audioData.getThumbnail());
         this.getStyleClass().add("song-card");
@@ -46,7 +49,8 @@ public class AudioCard extends FlowPane {
         imageView.setEffect(new DropShadow(20, Color.BLACK));
         imageView.setImage(image);
 
-        imageZone.getChildren().addAll(imageView, playButton);
+        imageZone.getChildren().add(imageView);
+        imageZone.getChildren().addAll(btnManager.getBtnList());
 
         Label songName = new Label(audioData.getTitle());
         Label singer = new Label(audioData.getArtist());
