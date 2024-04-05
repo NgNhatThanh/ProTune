@@ -7,12 +7,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Border;
 import javafx.scene.paint.Color;
 import protune.model.Playlist;
-import protune.view.in.mainzone.playlistpane.PlaylistPane;
+import protune.view.in.mainzone.playlistpane.PlPaneManager;
 
 public class PlaylistItem extends TextField {
     Playlist playlist;
-
-    PlaylistPane pane = new PlaylistPane();
 
     public PlaylistItem(Playlist playlist){
         this.playlist = playlist;
@@ -49,7 +47,7 @@ public class PlaylistItem extends TextField {
 //        });
 
         this.setOnMouseClicked(e -> {
-            pane.toFront();
+            PlPaneManager.showPane(this.playlist.getName());
         });
 
     }

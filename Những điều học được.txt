@@ -14,6 +14,7 @@
 + Tạo S3Client
 
 * Kinh nghiệm:
+- For each với object không thay đổi giá trị
 
 - Để tránh lỗi NoSuchMethodError, cần đảm bảo version của s3 và bom giống nhau
 - Một Node không thể cùng tồn tại ở 2 Parent được.

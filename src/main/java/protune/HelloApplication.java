@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.stage.Stage;
-import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import protune.controller.PlaylistManager;
 import protune.controller.auth.Authorization;
 import protune.controller.auth.UserManager;
@@ -52,12 +51,6 @@ public class HelloApplication extends Application {
                 System.out.println("xong");
                 SongListManager.addOnlineAudio();
                 System.out.println((double)(System.currentTimeMillis() - starttime) / 1000);
-
-                try {
-                    SongListManager.importLocalAudio();
-                } catch (IOException | ClassNotFoundException | InvalidAudioFrameException e) {
-                    throw new RuntimeException(e);
-                }
                 waitStage.close();
                 finalStage.show();
             }

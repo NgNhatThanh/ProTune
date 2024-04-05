@@ -17,7 +17,7 @@ import protune.view.in.mainzone.homepane.audiocard.button.PlayButton;
 
 public class AudioCard extends FlowPane {
 
-    private String ID;
+    protected String ID;
     private final AudioData audioData;
     protected AnchorPane imageZone = new AnchorPane();
     protected CardButtonManage btnManager = new CardButtonManage();

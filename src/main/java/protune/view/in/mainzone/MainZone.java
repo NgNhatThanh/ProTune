@@ -10,4 +10,9 @@ public class MainZone extends StackPane {
         this.setPrefSize(740, 480);
         this.getChildren().addAll(Init.searchPane, Init.localPane, Init.homePane);
     }
+
+    public void clearLocal(){
+        Init.homePane.clearLocal();
+        Init.localPane.clearLocal();
+    }
 }

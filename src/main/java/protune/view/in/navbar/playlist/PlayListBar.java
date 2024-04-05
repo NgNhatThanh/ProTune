@@ -10,6 +10,7 @@ import protune.Init;
 import protune.controller.PlaylistManager;
 import protune.model.Constant;
 import protune.model.Playlist;
+import protune.view.in.mainzone.playlistpane.PlPaneManager;
 import protune.view.in.navbar.item.NavItem;
 
 import java.io.File;
@@ -42,6 +43,7 @@ public class PlayListBar extends VBox {
             vBox.getChildren().add(new PlaylistItem(newPl));
             Init.playlistList.getItems().add(newPl.getName());
             PlaylistManager.add(newPl);
+            PlPaneManager.add(newPl);
         });
 
         tabIndex.getChildren().addAll(title, addBtn);

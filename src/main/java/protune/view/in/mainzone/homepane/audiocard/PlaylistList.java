@@ -23,7 +23,9 @@ public class PlaylistList extends ListView<String> {
         this.setOnMouseClicked(e -> {
             String plName = this.getSelectionModel().getSelectedItem();
 
-            if(plName != null) PlaylistManager.addTracktoPlaylist(plName, this.currentChoose);
+            if(plName != null){
+                PlaylistManager.addTracktoPlaylist(plName, this.currentChoose);
+            }
 
             this.setVisible(false);
         });

@@ -60,4 +60,15 @@ public class HomePane extends ScrollPane {
             }
         }
     }
+
+    public void clearLocal(){
+        for(int i = audioCardList.size() - 1; i >= 0; --i){
+            if(audioCardList.get(i) instanceof LocalAudioCard){
+                inside.getChildren().remove(i);
+                audioCardList.remove(i);
+                System.out.println("co");
+            }
+            else break;
+        }
+    }
 }

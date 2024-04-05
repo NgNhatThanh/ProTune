@@ -11,6 +11,7 @@ public class Playlist implements Serializable {
     public Playlist(String name){
         this.name = name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -18,14 +19,18 @@ public class Playlist implements Serializable {
     public String getName() {
         return name;
     }
+
+    public List<String> getAudioIDList() {
+        return audioIDList;
+    }
+
     List<String> audioIDList = new ArrayList<>();
 
     public void add(String audioID){
         audioIDList.add(audioID);
     }
 
-    public void oke(){
-        System.out.println(audioIDList.size());
-        for(String x : audioIDList) System.out.println(x);
+    public void del(String audioID){
+        audioIDList.remove(audioIDList.indexOf(audioID));
     }
 }

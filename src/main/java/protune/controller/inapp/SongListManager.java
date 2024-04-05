@@ -3,6 +3,7 @@ package protune.controller.inapp;
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import protune.Init;
 import protune.controller.AWSS3Handle;
+import protune.controller.auth.Authorization;
 import protune.controller.io.FileIOSystem;
 import protune.model.AudioData;
 import protune.view.in.mainzone.homepane.audiocard.AudioCard;
@@ -25,6 +26,13 @@ public class SongListManager {
     public static void addSong(AudioData audioData){
         homeSDList.add(audioData);
         localSDList.add(audioData);
+    }
+
+    public static AudioData getAudiobyID(String id){
+        for(AudioData audioData : homeSDList){
+            if(audioData.getID().equals(id)) return audioData;
+        }
+        return null;
     }
 
     public static void getOnlineAudioList(){
@@ -62,7 +70,14 @@ public class SongListManager {
     }
 
     public static void importLocalAudio() throws ClassNotFoundException, InvalidAudioFrameException, IOException {
-        localSDList = FileIOSystem.read("src/main/data/guestlocal.bin");
+        homeSDList.remove(localSDList);
+
+        if(Authorization.isAccount()){
+            localSDList = FileIOSystem.read("src/main/data/useraudio/" + Authorization.getCurrentUser().getUsername() + "/local.bin");
+        }
+        else{
+            localSDList = FileIOSystem.read("src/main/data/guestlocal.bin");
+        }
         for(int i = 0; i < localSDList.size(); ++i){
             try {
                 localSDList.get(i).init();
@@ -84,7 +99,10 @@ public class SongListManager {
     }
 
     public static void exportLocalList(){
-        FileIOSystem.write(SongListManager.getLocalList(), "src/main/data/guestlocal.bin");
+         if(Authorization.isAccount()) {
+             FileIOSystem.write(getLocalList(), "src/main/data/useraudio/" + Authorization.getCurrentUser().getUsername() + "/local.bin");
+         }
+         else FileIOSystem.write(getLocalList(), "src/main/data/guestlocal.bin");
     }
 
     public static AudioData getRandomAudio(AudioData currentAudio){

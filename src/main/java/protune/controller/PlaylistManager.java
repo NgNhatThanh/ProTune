@@ -4,6 +4,7 @@ import protune.controller.auth.Authorization;
 import protune.controller.io.FileIOSystem;
 import protune.model.AudioData;
 import protune.model.Playlist;
+import protune.view.in.mainzone.playlistpane.PlPaneManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,11 +35,10 @@ public class PlaylistManager {
 
         for(Playlist pl : l){
             playlists.put(pl.getName(), pl);
-            pl.oke();
+            PlPaneManager.add(pl);
         }
 
         cnt = l.size();
-        System.out.println(l.size());
     }
 
     public static  void exportPlaylists(){
@@ -57,8 +57,12 @@ public class PlaylistManager {
 
     public static void addTracktoPlaylist(String plName, AudioData audioData){
         Playlist tmp = playlists.get(plName);
-
         tmp.add(audioData.getID());
+        PlPaneManager.addTrack(audioData, plName);
+    }
+
+    public static void delTrack(String plName, AudioData audioData){
+        playlists.get(plName).del(audioData.getID());
     }
 
     public static List<String> getPlNames(){

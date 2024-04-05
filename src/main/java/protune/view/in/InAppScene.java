@@ -2,7 +2,11 @@ package protune.view.in;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import protune.Init;
+import protune.controller.inapp.SongListManager;
+
+import java.io.IOException;
 
 public class InAppScene extends Scene {
     AnchorPane pane;
@@ -25,6 +29,13 @@ public class InAppScene extends Scene {
     }
 
     public void modify(){
+        Init.homePane.toFront();
+        Init.mainZone.clearLocal();
+        try {
+            SongListManager.importLocalAudio();
+        } catch (ClassNotFoundException | InvalidAudioFrameException | IOException e) {
+            throw new RuntimeException(e);
+        }
         Init.navBar.modify();
         Init.playlistList.importList();
     }
