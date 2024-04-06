@@ -11,7 +11,7 @@ import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
-import org.jaudiotagger.tag.images.Artwork;
+import org.jaudiotagger.tag.datatype.Artwork;
 import protune.controller.RandomIDGenerator;
 
 import java.io.*;
@@ -22,17 +22,31 @@ import java.util.regex.Pattern;
 
 public class AudioData implements Serializable {
     private transient Media media;
+
     private transient Image thumbnail;
 
     private File audioFile;
+
     private String title;
+
     private String artist = "null";
+
     private URL url;
+
     private String ID;
+
     private boolean local = false;
+
+    public String playlist;
+
+    public void setPlaylist(String playlist){ this.playlist = playlist; }
+
+    public String getPlaylist(){ return playlist; }
+
     public String getID(){ return ID; }
 
     public boolean isLocal(){ return local; }
+
     public AudioData(File file){
         local = true;
         this.audioFile = file;
@@ -52,9 +66,11 @@ public class AudioData implements Serializable {
     }
 
     public Image getThumbnail(){ return thumbnail; }
+
     public void setThumbnail(Image thumbnail){
         this.thumbnail = thumbnail;
     }
+
     public String getTitle(){ return title; }
 
     public String getTitleWithoutVietAccent(){
@@ -62,6 +78,7 @@ public class AudioData implements Serializable {
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
         return pattern.matcher(nfdNormalizedString).replaceAll("");
     }
+
     public void setTitle(String title){
         int i = title.length() - 1;
         for(; i >= 0; --i){
@@ -145,8 +162,7 @@ public class AudioData implements Serializable {
 
     public File getAudioFile(){ return audioFile; }
 
-
-    public boolean isSamePath(AudioData audioData){
-        return this.audioFile.getPath().equals(audioData.audioFile.getPath());
+    public boolean equal(AudioData audioData){
+        return this.getID().equals(audioData.getID());
     }
 }

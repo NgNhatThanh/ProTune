@@ -31,6 +31,16 @@ public class PlaylistList extends ListView<String> {
         });
     }
 
+    public void changeName(String oldName, String newName){
+        int idx = this.getItems().indexOf(oldName);
+        this.getItems().remove(oldName);
+        this.getItems().add(idx, newName);
+    }
+
+    public void removeItem(String itemName){
+        this.getItems().remove(itemName);
+    }
+
     public void prepare(AudioData audioData){
         currentChoose = audioData;
     }

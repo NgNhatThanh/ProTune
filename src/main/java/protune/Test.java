@@ -1,14 +1,14 @@
 package protune;
 
 import javafx.application.Application;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.scene.Cursor;
-import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
+import java.util.Optional;
+import java.util.Random;
 
 
 public class Test extends Application {
@@ -16,43 +16,27 @@ public class Test extends Application {
         launch();
     }
 
+    Random rnd = new Random();
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
 
-//        ObservableList<String> l = FXCollections.observableArrayList();
+        TextInputDialog textInputDialog = new TextInputDialog();
+
+        Button okBtn = (Button)textInputDialog.getDialogPane().lookupButton(ButtonType.OK);
+        TextField inputField = textInputDialog.getEditor();
+//        BooleanBinding isValid = ;
+        okBtn.disableProperty().bind(inputField.textProperty().isEmpty());
+
+        Optional<String> res = textInputDialog.showAndWait();
+
+        if(res.isPresent()) System.out.println(res.get());
+        else System.out.println("ko cao");
+//        AnchorPane anchorPane = new AnchorPane();
 //
-//        l.addAll("ok2", "ok1", "ok3");
-        ListView<String> listView = new ListView<>();
-        listView.getItems().addAll("oke", "ok1", "oke2", "oke3");
-
-        listView.setFixedCellSize(20);
-        DoubleProperty hei = new SimpleDoubleProperty(listView.getFixedCellSize() * listView.getItems().size());
-
-
-        listView.setCursor(Cursor.HAND);
-        listView.setOnMouseClicked(e -> {
-            String tmp = listView.getSelectionModel().getSelectedItem();
-            System.out.println(tmp);
-            listView.getItems().add("new");
-//            listView.getItems().remove(listView.getSelectionModel().getSelectedItem());
-            hei.add(listView.getFixedCellSize());
-            System.out.println(hei);
-        });
-
-
-//        DoubleProperty hei = new SimpleDoubleProperty(100);
-
-        listView.prefHeightProperty().bind(hei);
-
-
-
-        AnchorPane anchorPane = new AnchorPane();
-//        anchorPane.prefHeightProperty().bind(listView.widthProperty());
-        anchorPane.getChildren().add(listView);
-
-        Scene scene = new Scene(anchorPane, 500, 300);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+//        Scene scene = new Scene(anchorPane, 500, 300);
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
     }
 }

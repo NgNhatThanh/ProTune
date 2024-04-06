@@ -20,7 +20,7 @@ import java.util.List;
 public class PlayListBar extends VBox {
     NavItem title;
 
-    VBox vBox = new VBox();
+    VBox plList = new VBox();
     public PlayListBar(){
 
         try {
@@ -40,7 +40,7 @@ public class PlayListBar extends VBox {
         addBtn.setFocusTraversable(false);
         addBtn.setOnAction(e -> {
             Playlist newPl = new Playlist(PlaylistManager.getNewName());
-            vBox.getChildren().add(new PlaylistItem(newPl));
+            plList.getChildren().add(new PlaylistItem(newPl, this));
             Init.playlistList.getItems().add(newPl.getName());
             PlaylistManager.add(newPl);
             PlPaneManager.add(newPl);
@@ -49,23 +49,24 @@ public class PlayListBar extends VBox {
         tabIndex.getChildren().addAll(title, addBtn);
 
         ScrollPane plList = new ScrollPane();
-        plList.setPrefSize(230, 130);
-        plList.setContent(vBox);
+        plList.setPrefSize(230, 120);
+        plList.setContent(this.plList);
 
         this.getChildren().addAll(tabIndex, plList);
     }
 
     public void importPlaylists(){
-        vBox.getChildren().clear();
+        plList.getChildren().clear();
 
-        System.out.println("con: " + vBox.getChildren().size());
         PlaylistManager.importPlaylists();
         List<Playlist> l = PlaylistManager.getList();
 
-        System.out.println(l.size());
-
         for(Playlist pl : l){
-            vBox.getChildren().add(new PlaylistItem(pl));
+            plList.getChildren().add(new PlaylistItem(pl, this));
         }
+    }
+
+    public void removeItem(PlaylistItem item){
+        plList.getChildren().remove(item);
     }
 }

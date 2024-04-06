@@ -16,7 +16,7 @@ public class ExitItem extends NavItem{
             Init.inAppScene.reset();
             if(Authorization.isAccount()) PlaylistManager.exportPlaylists();
             SongListManager.exportLocalList();
-            PlPaneManager.delAll();
+            PlPaneManager.delAllPane();
         });
     }
 }

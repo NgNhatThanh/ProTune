@@ -14,7 +14,7 @@ public class PLCard extends AudioCard{
         super(audioData);
         this.ID = audioData.getID();
         playlistName = plName;
-        plDelButton = new PLDelButton(Constant.uploadIconPath, this);
+        plDelButton = new PLDelButton(Constant.plDelIconPath, this);
         btnManager.getBtnList().removeLast(); // remove add icon
         btnManager.add(plDelButton);
 

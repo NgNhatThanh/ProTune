@@ -5,11 +5,18 @@ import java.io.IOException;
 import java.io.Serializable;
 
 public class UserData implements Serializable {
-    private String firstName, lastName, username, password;
+    private String firstName, lastName, fullName, username, password;;
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getFirstName(){ return firstName; }
 
     public UserData(String firstName, String lastName, String username, String password){
         this.firstName = firstName;
         this.lastName = lastName;
+        this.fullName = firstName + " " + lastName;
         this.username = username;
         this.password = password;
     }
@@ -37,10 +44,6 @@ public class UserData implements Serializable {
     public String getUsername(){ return username; }
 
     public String getPassword(){ return password; }
-
-    public boolean equals(UserData other){
-        return this.username.equals(other.username);
-    }
 
     public boolean isValid(){
         return !username.isEmpty() && !username.contains(" ") && !firstName.isEmpty() && !lastName.isEmpty();

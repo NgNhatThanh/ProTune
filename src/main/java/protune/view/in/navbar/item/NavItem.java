@@ -11,6 +11,7 @@ public class NavItem extends Label {
 
     public NavItem(String iconPath, String content) throws FileNotFoundException {
         setText(content);
+        this.setWrapText(true);
         setIcon(this, new Image(new FileInputStream(iconPath)));
         this.setHeight(100);
         this.getStyleClass().add("nav-items");

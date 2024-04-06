@@ -30,5 +30,6 @@ public class Constant {
     static public final String exitIconPath = "src/main/resources/img/logout.png";
     static public final String addIconPath = "src/main/resources/img/add.png";
     static public final String plDelIconPath = "src/main/resources/img/pldel.png";
+    static public final String userIconPath = "src/main/resources/img/user.png";
     static public final String defaultSongThumbnailPath = "src/main/resources/img/default-thumbnail.png";
 }

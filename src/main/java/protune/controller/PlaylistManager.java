@@ -1,6 +1,7 @@
 package protune.controller;
 
 import protune.controller.auth.Authorization;
+import protune.controller.inapp.SongListManager;
 import protune.controller.io.FileIOSystem;
 import protune.model.AudioData;
 import protune.model.Playlist;
@@ -41,23 +42,57 @@ public class PlaylistManager {
         cnt = l.size();
     }
 
-    public static  void exportPlaylists(){
+    public static void exportPlaylists(){
 
         List<Playlist> l = new ArrayList<>(playlists.values());
 
         FileIOSystem.write(l, plFile.getPath());
     }
 
+    public static void delPl(Playlist playlist){
+        playlists.remove(playlist.getName());
+    }
+
+    public static AudioData getNextAudio(AudioData current, String plName){
+
+        AudioData next = SongListManager.getAudiobyID(playlists.get(plName).getNextId(current.getID()));
+        next.setPlaylist(plName);
+
+        return next;
+    }
+
+    public static void changePlName(String oldName, String newName){
+        playlists.get(oldName).setName(newName);
+        playlists.put(newName, playlists.get(oldName));
+        playlists.remove(oldName);
+    }
+
+    public static AudioData getPrevAudio(AudioData current, String plName){
+        playlists.get(plName).getPrevId(current.getID());
+
+        AudioData prev = SongListManager.getAudiobyID(playlists.get(plName).getPrevId(current.getID()));
+        prev.setPlaylist(plName);
+        return prev;
+    }
+
+    public static boolean exist(String plName){
+        return playlists.containsKey(plName);
+    }
+
+    public static AudioData getRandAudio(AudioData current, String plName){
+        playlists.get(plName).getRandomId(current.getID());
+
+        AudioData rand = SongListManager.getAudiobyID(playlists.get(plName).getRandomId(current.getID()));
+        rand.setPlaylist(plName);
+        return rand;
+    }
+
     public static void add(Playlist playlist) {
-//        if(newPl.exists()) throw new IOException();
-//        else{
             playlists.put(playlist.getName(), playlist);
-//        }
     }
 
     public static void addTracktoPlaylist(String plName, AudioData audioData){
-        Playlist tmp = playlists.get(plName);
-        tmp.add(audioData.getID());
+        playlists.get(plName).add(audioData.getID());
         PlPaneManager.addTrack(audioData, plName);
     }
 

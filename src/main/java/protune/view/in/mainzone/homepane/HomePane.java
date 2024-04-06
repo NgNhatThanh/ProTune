@@ -40,6 +40,7 @@ public class HomePane extends ScrollPane {
     public void del(AudioCard audioCard){
         for(Node child : inside.getChildren()){
             if(audioCard.equal((AudioCard) child)){
+                audioCardList.remove((AudioCard) child);
                 inside.getChildren().remove(child);
                 break;
             }

@@ -14,6 +14,9 @@ import java.util.List;
 public class NavBar extends ToolBar {
 
     PlayListBar playListBar = new PlayListBar();
+
+    UserItem userItem;
+
     public NavBar() throws FileNotFoundException {
         this.setOrientation(Orientation.VERTICAL);
         this.setPrefSize(230, 480);
@@ -34,14 +37,20 @@ public class NavBar extends ToolBar {
 
     public void modify(){
         if(Authorization.isAccount()){
+            try {
+                userItem = new UserItem(Constant.userIconPath, Authorization.getCurrentUser().getFullName());
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
             this.getItems().remove(playListBar);
             playListBar.importPlaylists();
             this.getItems().add(4, playListBar);
+            this.getItems().add(0, userItem);
         }
         else this.getItems().remove(playListBar);
     }
 
     public void reset(){
-        this.getItems().remove(playListBar);
+        this.getItems().removeAll(userItem, playListBar);
     }
 }

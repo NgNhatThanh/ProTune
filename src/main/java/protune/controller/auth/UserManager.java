@@ -31,6 +31,10 @@ public class UserManager {
         dataMP.put(userData.getUsername(), userData);
     }
 
+    public static UserData getUserbyUsername(String username){
+        return dataMP.get(username);
+    }
+
     public static boolean exist(String username){
         return dataMP.containsKey(username);
     }

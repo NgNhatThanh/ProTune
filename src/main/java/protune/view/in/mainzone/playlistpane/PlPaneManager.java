@@ -22,7 +22,11 @@ public class PlPaneManager {
         panes.put(playlist.getName(), newPane);
 
         for(String Id : playlist.getAudioIDList()){
-            newPane.addSong(new PLCard(SongListManager.getAudiobyID(Id), playlist.getName()));
+            AudioData audioData = SongListManager.getAudiobyID(Id);
+            if(audioData != null){
+                audioData.setPlaylist(playlist.getName());
+                newPane.addSong(new PLCard(audioData, playlist.getName()));
+            }
         }
 
         Init.mainZone.getChildren().add(newPane);
@@ -33,18 +37,28 @@ public class PlPaneManager {
         panes.get(plName).toFront();
     }
 
-    public static void delAll(){
+    public static void changeName(String oldName, String newName){
+        panes.put(newName, panes.get(oldName));
+        panes.remove(oldName);
+    }
+
+    public static void delPane(Playlist playlist){
+        Init.mainZone.getChildren().remove(panes.get(playlist.getName()));
+        panes.remove(playlist.getName());
+    }
+
+    public static void delAllPane(){
         panes.clear();
-        System.out.println("co " + Init.mainZone.getChildren().size() + " pane");
         Init.mainZone.getChildren().remove(paneList);
         paneList.clear();
     }
 
     public static void addTrack(AudioData audioData, String plName){
+        audioData.setPlaylist(plName);
         panes.get(plName).addSong(new PLCard(audioData, plName));
     }
 
-    public static void del(PLCard plCard, String plName){
+    public static void delTrack(PLCard plCard, String plName){
         panes.get(plName).del(plCard);
         if(Init.playBar.isHaveSong() && Init.playBar.getPlayingSong().equals(plCard.getdata())) Init.playBar.reset();
     }

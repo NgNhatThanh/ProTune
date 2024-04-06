@@ -108,7 +108,7 @@ public class SongListManager {
     public static AudioData getRandomAudio(AudioData currentAudio){
         Random rnd = new Random();
         int curr = find(currentAudio);
-        int rand = curr;
+        int rand = rnd.nextInt(homeSDList.size());
         while(rand == curr) rand = rnd.nextInt(homeSDList.size());
         return homeSDList.get(rand);
     }
@@ -125,16 +125,19 @@ public class SongListManager {
         return homeSDList.get(idx-  1);
     }
 
-    public static int find(AudioData audioData){ // online
+    public static int find(AudioData audioData){
         for(int i = 0; i < homeSDList.size(); ++i){
-            if(homeSDList.get(i).isSamePath(audioData)) return i;
+            if(homeSDList.get(i).equal(audioData)){
+                System.out.println("found" + homeSDList.get(i).getTitle());
+                return i;
+            }
         }
         return -1;
     }
 
     public static void del(AudioData audioData){
         for(int i = 0; i < localSDList.size(); ++i){
-            if(localSDList.get(i).isSamePath(audioData)){
+            if(localSDList.get(i).equal(audioData)){
                 localSDList.remove(i);
                 homeSDList.remove(onlineAudioCount + i);
             }

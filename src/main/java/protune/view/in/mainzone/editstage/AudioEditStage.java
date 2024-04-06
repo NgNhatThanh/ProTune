@@ -22,8 +22,8 @@ import org.jaudiotagger.tag.FieldDataInvalidException;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
-import org.jaudiotagger.tag.images.Artwork;
-import org.jaudiotagger.tag.images.ArtworkFactory;
+import org.jaudiotagger.tag.datatype.Artwork;
+//import org.jaudiotagger.tag.datatype.ArtworkFactory;
 import protune.Init;
 import protune.model.AudioData;
 import protune.view.in.mainzone.homepane.audiocard.LocalAudioCard;
@@ -79,9 +79,10 @@ public class AudioEditStage extends Stage {
         Button saveBtn = new Button("Save");
         saveBtn.setOnAction(e -> {
             if(imgFile != null){
-                Artwork artwork;
+                Artwork artwork = null;
                 try {
-                    artwork = ArtworkFactory.createArtworkFromFile(imgFile);
+//                    Artwork ArtworkFactory;
+                    artwork = artwork.createArtworkFromFile(imgFile);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }

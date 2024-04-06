@@ -4,6 +4,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+import protune.controller.PlaylistManager;
 import protune.controller.inapp.SongListManager;
 import protune.model.AudioData;
 import protune.view.in.playbar.nowplaying.NowPlayingSong;
@@ -57,6 +58,7 @@ public class PlayBar extends FlowPane {
     }
 
     public boolean isHaveSong(){ return haveSong; }
+
     public boolean isPlaying(){ return playing; }
 
     public void setPlaying(boolean state){ this.playing = state; }
@@ -96,7 +98,11 @@ public class PlayBar extends FlowPane {
     }
 
     public void playRandom(){
-        AudioData nextSong = SongListManager.getRandomAudio(this.playingSong);
+        AudioData nextSong = null;
+
+        if(playingSong.getPlaylist() == null) nextSong = SongListManager.getRandomAudio(this.playingSong);
+        else nextSong = PlaylistManager.getRandAudio(playingSong, playingSong.getPlaylist());
+
         try {
             setSongPlay(nextSong);
         } catch (FileNotFoundException e) {
@@ -107,7 +113,10 @@ public class PlayBar extends FlowPane {
     public void playNext(){
         if(shuffle) playRandom();
         else{
-            AudioData nextSong = SongListManager.getNextSong(this.playingSong);
+            AudioData nextSong = null;
+
+            if(playingSong.getPlaylist() == null) nextSong = SongListManager.getNextSong(this.playingSong);
+            else nextSong = PlaylistManager.getNextAudio(playingSong, playingSong.getPlaylist());
             try {
                 setSongPlay(nextSong);
             } catch (FileNotFoundException e) {
@@ -119,7 +128,10 @@ public class PlayBar extends FlowPane {
     public void playPrevious(){
         if(shuffle) playRandom();
         else{
-            AudioData prevSong = SongListManager.getPrevSong(this.playingSong);
+            AudioData prevSong = null;
+
+            if(playingSong.getPlaylist() == null) prevSong = SongListManager.getPrevSong(this.playingSong);
+            else prevSong = PlaylistManager.getPrevAudio(playingSong, playingSong.getPlaylist());
             try {
                 setSongPlay(prevSong);
             } catch (FileNotFoundException e) {

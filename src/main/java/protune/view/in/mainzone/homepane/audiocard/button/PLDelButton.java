@@ -11,7 +11,7 @@ public class PLDelButton extends CardButton{
         this.setLayoutX(5);
         this.setLayoutY(125);
         this.setOnMouseClicked(e -> {
-            PlPaneManager.del(plCard, plCard.getPlaylistName());
+            PlPaneManager.delTrack(plCard, plCard.getPlaylistName());
             PlaylistManager.delTrack(plCard.getPlaylistName(), plCard.getdata());
         });
     }
