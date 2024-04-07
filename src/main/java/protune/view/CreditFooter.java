@@ -39,9 +39,7 @@ public class CreditFooter extends FlowPane {
     private void openLink(String link){
         try {
             Desktop.getDesktop().browse(new URI(link));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (URISyntaxException e) {
+        } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }

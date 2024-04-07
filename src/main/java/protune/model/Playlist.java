@@ -45,7 +45,7 @@ public class Playlist implements Serializable {
 
     public String getPrevId(String currID){
         int idx = audioIDList.indexOf(currID);
-        if(idx == 0) return audioIDList.get(0);
+        if(idx == 0) return audioIDList.getFirst();
         return audioIDList.get(idx - 1);
     }
 
@@ -62,6 +62,6 @@ public class Playlist implements Serializable {
     }
 
     public void del(String audioID){
-        audioIDList.remove(audioIDList.indexOf(audioID));
+        audioIDList.remove(audioID);
     }
 }

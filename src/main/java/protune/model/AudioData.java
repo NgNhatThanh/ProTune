@@ -12,7 +12,7 @@ import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 import org.jaudiotagger.tag.datatype.Artwork;
-import protune.controller.RandomIDGenerator;
+import protune.controller.inapp.RandomIDGenerator;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -66,10 +66,6 @@ public class AudioData implements Serializable {
     }
 
     public Image getThumbnail(){ return thumbnail; }
-
-    public void setThumbnail(Image thumbnail){
-        this.thumbnail = thumbnail;
-    }
 
     public String getTitle(){ return title; }
 
@@ -137,7 +133,6 @@ public class AudioData implements Serializable {
                 f.commit();
             }
             else this.ID = tag.getFirst(FieldKey.COMMENT);
-            System.out.println(this.title + " " + this.ID);
             Artwork artwork = tag.getFirstArtwork();
             if (artwork != null) {
                 byte[] imageData = artwork.getBinaryData();
@@ -146,7 +141,6 @@ public class AudioData implements Serializable {
             } else {
                 this.thumbnail = new Image(new File(Constant.defaultSongThumbnailPath).toURI().toString());
             }
-            System.out.println("oke");
         }
         catch (TagException | CannotReadException | ReadOnlyFileException e) {
             System.out.println("loi");

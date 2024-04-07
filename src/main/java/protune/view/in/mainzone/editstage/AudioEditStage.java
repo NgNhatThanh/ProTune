@@ -23,13 +23,13 @@ import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 import org.jaudiotagger.tag.datatype.Artwork;
-//import org.jaudiotagger.tag.datatype.ArtworkFactory;
 import protune.Init;
 import protune.model.AudioData;
 import protune.view.in.mainzone.homepane.audiocard.LocalAudioCard;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class AudioEditStage extends Stage {
     File imgFile;
@@ -66,9 +66,7 @@ public class AudioEditStage extends Stage {
         else imageZone.setText("Null");
 
         Button chooseImgBtn = new Button("Choose\nimage");
-        chooseImgBtn.setOnAction(e -> {
-            chooseImg();
-        });
+        chooseImgBtn.setOnAction(e -> chooseImg());
 
         FlowPane imagePane = new FlowPane(l1, imageZone, chooseImgBtn);
         imagePane.setHgap(15);
@@ -79,10 +77,9 @@ public class AudioEditStage extends Stage {
         Button saveBtn = new Button("Save");
         saveBtn.setOnAction(e -> {
             if(imgFile != null){
-                Artwork artwork = null;
+                Artwork artwork;
                 try {
-//                    Artwork ArtworkFactory;
-                    artwork = artwork.createArtworkFromFile(imgFile);
+                    artwork = Artwork.createArtworkFromFile(imgFile);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -136,7 +133,7 @@ public class AudioEditStage extends Stage {
         mainPain.getChildren().addAll(imagePane, l2, title, l3, artist, btnPane);
 
         Scene scene = new Scene(mainPain, 520, 435);
-        scene.getStylesheets().add(getClass().getResource("/stylesheet/editstage.css").toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/stylesheet/editstage.css")).toExternalForm());
         this.setScene(scene);
         this.setResizable(false);
         this.show();

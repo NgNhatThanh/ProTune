@@ -2,7 +2,6 @@ package protune.controller.inapp;
 
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import protune.Init;
-import protune.controller.AWSS3Handle;
 import protune.controller.auth.Authorization;
 import protune.controller.io.FileIOSystem;
 import protune.model.AudioData;
@@ -17,7 +16,7 @@ import java.util.Random;
 public class SongListManager {
     private static List<AudioData> localSDList = new ArrayList<>();
     private static List<String> urlList;
-    private static List<AudioData> homeSDList = new ArrayList<>();
+    private static final List<AudioData> homeSDList = new ArrayList<>();
     public static List<AudioData> getLocalList(){
         return localSDList;
     }
@@ -38,7 +37,7 @@ public class SongListManager {
     public static void getOnlineAudioList(){
         urlList = AWSS3Handle.getAudioUrlList();
         onlineAudioCount = urlList.size();
-        System.out.println(onlineAudioCount);
+
         for(String url : urlList){
             new Thread(() -> {
                 AudioData audioData = new AudioData(url);
@@ -49,28 +48,16 @@ public class SongListManager {
                 } catch (InvalidAudioFrameException | IOException e) {
                     throw new RuntimeException(e);
                 }
-//
             }).start();
 
-//            AudioData audioData = new AudioData(url);
-//
-//            try {
-//                audioData.init();
-//                homeSDList.add(audioData);
-//            } catch (InvalidAudioFrameException | IOException e) {
-//                throw new RuntimeException(e);
-//            }
         }
 
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
     }
 
     public static void importLocalAudio() throws ClassNotFoundException, InvalidAudioFrameException, IOException {
-        homeSDList.remove(localSDList);
+        for(int i = onlineAudioCount; i < homeSDList.size(); ++i) homeSDList.remove(i);
+
+        localSDList.clear();
 
         if(Authorization.isAccount()){
             localSDList = FileIOSystem.read("src/main/data/useraudio/" + Authorization.getCurrentUser().getUsername() + "/local.bin");
@@ -92,7 +79,6 @@ public class SongListManager {
 
     public static void addOnlineAudio(){
         while(homeSDList.size() < onlineAudioCount) System.out.print("");
-//        while(homeSDList.size() < 10) System.out.print("");
         for(AudioData audioData : homeSDList){
             Init.homePane.addSong(new AudioCard(audioData));
         }

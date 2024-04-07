@@ -4,7 +4,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Border;
 import javafx.scene.paint.Color;
-import protune.controller.PlaylistManager;
+import protune.controller.inapp.PlaylistManager;
 import protune.model.AudioData;
 
 import java.util.List;

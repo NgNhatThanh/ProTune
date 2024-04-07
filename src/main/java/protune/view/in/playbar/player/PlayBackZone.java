@@ -29,9 +29,7 @@ public class PlayBackZone extends FlowPane {
         progressBar = new MyProgressBar(0, 400, 10);
         progressBar.setDisable(true);
 
-        progressBar.progressProperty().addListener(observable -> {
-            timeStamp.setText(timeFormat(progressBar.getProgress() * totalDuration));
-        });
+        progressBar.progressProperty().addListener(observable -> timeStamp.setText(timeFormat(progressBar.getProgress() * totalDuration)));
 
         progressBar.setOnMouseDragged(e -> {
             autoSet = false;

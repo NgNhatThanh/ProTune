@@ -1,6 +1,6 @@
 package protune.view.in.mainzone.homepane.audiocard.button;
 
-import protune.controller.PlaylistManager;
+import protune.controller.inapp.PlaylistManager;
 import protune.view.in.mainzone.homepane.audiocard.PLCard;
 import protune.view.in.mainzone.playlistpane.PlPaneManager;
 

@@ -47,16 +47,12 @@ public class FileIOSystem {
             a.writeObject(list);
             System.out.println("Write file " + filePath + " successfully!");
         } catch (FileNotFoundException e) {
-//            throw new FileNotFoundException("File not found!");
             System.out.println("file not found");
         } catch (SocketException e) {
-//            throw new SocketException("Socket exception!");
             System.out.println("socket exception");
         } catch (UnknownHostException e) {
-//            throw new UnknownHostException("Unknown host exception!");
             System.out.println("unknown host");
         } catch (IOException e) {
-//            throw new IOException("Write file failed!");
             System.out.println("write failed");
         } finally {
             try {

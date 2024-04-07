@@ -12,7 +12,7 @@ import java.util.Map;
 public class UserManager {
     private static List<UserData> userDataList = new ArrayList<>(); 
 
-    private static Map<String, UserData> dataMP = new HashMap<>();
+    private static final Map<String, UserData> dataMP = new HashMap<>();
 
     public static void importList() throws IOException, ClassNotFoundException {
         userDataList = FileIOSystem.read("src/main/data/userlist.bin");

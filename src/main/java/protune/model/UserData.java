@@ -5,13 +5,15 @@ import java.io.IOException;
 import java.io.Serializable;
 
 public class UserData implements Serializable {
-    private String firstName, lastName, fullName, username, password;;
+    private String firstName, lastName, fullName;
+
+    private final String username;
+
+    private final String password;
 
     public String getFullName() {
         return fullName;
     }
-
-    public String getFirstName(){ return firstName; }
 
     public UserData(String firstName, String lastName, String username, String password){
         this.firstName = firstName;

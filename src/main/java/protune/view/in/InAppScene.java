@@ -11,8 +11,6 @@ import java.io.IOException;
 public class InAppScene extends Scene {
     AnchorPane pane;
 
-
-
     public InAppScene(){
         super(new AnchorPane(), 1000, 600);
         pane = new AnchorPane();
@@ -43,6 +41,5 @@ public class InAppScene extends Scene {
     public void reset(){
         Init.playBar.reset();
         Init.navBar.reset();
-
     }
 }

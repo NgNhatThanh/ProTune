@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import protune.Init;
-import protune.controller.PlaylistManager;
+import protune.controller.inapp.PlaylistManager;
 import protune.model.Constant;
 import protune.model.Playlist;
 import protune.view.in.mainzone.playlistpane.PlPaneManager;

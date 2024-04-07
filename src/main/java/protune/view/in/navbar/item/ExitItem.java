@@ -1,7 +1,7 @@
 package protune.view.in.navbar.item;
 
 import protune.Init;
-import protune.controller.PlaylistManager;
+import protune.controller.inapp.PlaylistManager;
 import protune.controller.auth.Authorization;
 import protune.controller.inapp.SongListManager;
 import protune.view.in.mainzone.playlistpane.PlPaneManager;

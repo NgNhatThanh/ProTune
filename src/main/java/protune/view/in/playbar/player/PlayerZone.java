@@ -19,6 +19,6 @@ public class PlayerZone extends FlowPane {
 
     public void reset(){
         playBackZone.reset();
-        controlZone.init();;
+        controlZone.init();
     }
 }

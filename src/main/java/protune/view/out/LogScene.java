@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 
 public class LogScene extends Scene {
 
-    private AnchorPane pane;
+    private final AnchorPane pane;
 
     public LogScene() throws FileNotFoundException {
         super(new AnchorPane(), Constant.appWidth, Constant.appHeight);

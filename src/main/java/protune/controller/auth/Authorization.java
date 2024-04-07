@@ -16,7 +16,5 @@ public class Authorization {
         currentRole = role;
     }
 
-    public static Role getCurrentRole(){ return currentRole; }
-
     public static boolean isAccount(){ return currentRole == Role.ACCOUNT; }
 }

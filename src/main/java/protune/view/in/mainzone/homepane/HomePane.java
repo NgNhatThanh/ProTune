@@ -32,7 +32,6 @@ public class HomePane extends ScrollPane {
     }
 
     public void addSong(AudioCard audioCard){
-        System.out.println("bo");
         audioCardList.add(audioCard);
         inside.getChildren().add(audioCard);
     }

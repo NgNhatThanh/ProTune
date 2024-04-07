@@ -6,7 +6,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Border;
 import javafx.scene.paint.Color;
 import protune.Init;
-import protune.controller.PlaylistManager;
+import protune.controller.inapp.PlaylistManager;
 import protune.model.Playlist;
 import protune.view.in.mainzone.playlistpane.PlPaneManager;
 

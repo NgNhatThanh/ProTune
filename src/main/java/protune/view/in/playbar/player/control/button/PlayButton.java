@@ -8,9 +8,7 @@ public class PlayButton extends ControlButton {
 
     public PlayButton(String iconPath) {
         super(iconPath);
-        this.setOnMouseClicked(e -> {
-            changeState();
-        });
+        this.setOnMouseClicked(e -> changeState());
     }
 
     public void init(){

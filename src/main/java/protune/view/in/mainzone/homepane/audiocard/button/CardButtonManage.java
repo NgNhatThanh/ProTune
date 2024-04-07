@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CardButtonManage {
-    private List<CardButton> btnList = new ArrayList<>();
+    private final List<CardButton> btnList = new ArrayList<>();
 
     public void add(CardButton cardButton){
         btnList.add(cardButton);
