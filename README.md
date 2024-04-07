@@ -15,6 +15,7 @@
 - Tạo playlist riêng
 
 ## Cách cài đặt:
+- Cài JDK
 - Clone repo này
 - Chạy file "ProTune.jar" để khởi động ứng dụng
 ##### Note: ứng dụng có thể bị "Not respoding" trong lúc khởi động, nếu gặp hãy thử tắt và mở lại 
