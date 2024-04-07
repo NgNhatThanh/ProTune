@@ -38,18 +38,20 @@ public class SongListManager {
         urlList = AWSS3Handle.getAudioUrlList();
         onlineAudioCount = urlList.size();
 
-        for(String url : urlList){
+        for(int i = 0; i < urlList.size(); i += 5){
+            int finalI = i;
             new Thread(() -> {
-                AudioData audioData = new AudioData(url);
+                for(int j = finalI; j < Math.min(finalI + 5, urlList.size()); ++j){
+                    AudioData audioData = new AudioData(urlList.get(j));
 
-                try {
-                    audioData.init();
-                    homeSDList.add(audioData);
-                } catch (InvalidAudioFrameException | IOException e) {
-                    throw new RuntimeException(e);
+                    try {
+                        audioData.init();
+                        homeSDList.add(audioData);
+                    } catch (InvalidAudioFrameException | IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }).start();
-
         }
 
     }
