@@ -11,21 +11,6 @@ import java.util.List;
 
 public class AWSS3Handle {
 
-//    public static void moveCredential(){
-//        Path cre = Paths.get("src/main/resources/aws/credentials");
-//
-//        System.out.println(System.getProperty("user.home") + "\\.aws");
-//
-//        Path des = Paths.get(System.getProperty("user.home") + "\\.aws");
-//
-//        try {
-//            Files.copy(cre, des, StandardCopyOption.REPLACE_EXISTING);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//    }
-
     private static final Region region = Region.AP_SOUTHEAST_1;
     private static final S3Client s3 = S3Client.builder()
             .region(region)
@@ -37,6 +22,8 @@ public class AWSS3Handle {
         List<S3Object> audioList = getAudioList();
 
         List<String> urlList = new ArrayList<>();
+
+        if(audioList == null) return urlList;
         for(S3Object object : audioList){
             urlList.add(getAudioUrl(object.key()));
         }
@@ -54,10 +41,8 @@ public class AWSS3Handle {
             return res.contents();
 
         } catch (S3Exception e) {
-            System.err.println(e.awsErrorDetails().errorMessage());
-            System.exit(1);
+            return null;
         }
-        return null;
     }
 
     public static String getAudioUrl(String fileName){
@@ -71,9 +56,7 @@ public class AWSS3Handle {
             return url.toString();
 
         } catch (S3Exception e) {
-            System.err.println(e.awsErrorDetails().errorMessage());
-            System.exit(1);
+            return null;
         }
-        return null;
     }
 }
