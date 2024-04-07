@@ -1,7 +1,7 @@
 package protune.view.in.navbar.item;
 
 import protune.Init;
-import protune.controller.inapp.PlaylistManager;
+import protune.controller.inapp.PlaylistTrackManager;
 import protune.controller.auth.Authorization;
 import protune.controller.inapp.SongListManager;
 import protune.view.in.mainzone.playlistpane.PlPaneManager;
@@ -14,7 +14,7 @@ public class ExitItem extends NavItem{
         this.setOnMouseClicked(e -> {
             Init.appStage.comeOut();
             Init.inAppScene.reset();
-            if(Authorization.isAccount()) PlaylistManager.exportPlaylists();
+            if(Authorization.isAccount()) PlaylistTrackManager.exportPlaylists();
             SongListManager.exportLocalList();
             PlPaneManager.delAllPane();
         });

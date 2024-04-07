@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 import protune.Init;
 import protune.controller.auth.Authorization;
 import protune.controller.auth.UserManager;
-import protune.controller.inapp.PlaylistManager;
+import protune.controller.inapp.PlaylistTrackManager;
 import protune.controller.inapp.SongListManager;
 
 import java.io.File;
@@ -26,7 +26,7 @@ public class MainStage extends Stage {
         this.setOnHidden(e -> {
             SongListManager.exportLocalList();
             UserManager.exportList();
-            if(Authorization.isAccount()) PlaylistManager.exportPlaylists();
+            if(Authorization.isAccount()) PlaylistTrackManager.exportPlaylists();
             System.exit(0);
         });
     }

@@ -10,15 +10,25 @@
 ## Các tính năng:
 - Đăng nhập / Đăng ký
 - Nghe các bài nhạc trực tuyến mà mình đã up
-    - Note: kho nhạc của mình có thời hạn đến trước ngày 24/3/2025, sau thời gian đó ứng dụng sẽ không nghe nhạc trực tuyến được nữa
-- Nghe / chỉnh sửa các bài nhạc trong máy 
+    - **Note**: kho nhạc online của mình có thể ngừng hoạt động, lúc đó app sẽ không có những bài nhạc này nữa, nhưng các chức năng khác vẫn bình thường
+- Nghe / chỉnh sửa các bài nhạc được up từ máy 
 - Tạo playlist riêng
 
 ## Cách cài đặt:
 - Cài JDK
 - Clone repo này
 - Chạy file "ProTune.jar" để khởi động ứng dụng
-##### Note: ứng dụng có thể bị "Not respoding" trong lúc khởi động, nếu gặp hãy thử tắt và mở lại 
+##### Note: ứng dụng có thể bị "Not respoding" trong lúc khởi động, nếu gặp hãy thử khởi động lại
+
+## Ảnh demo
+
+![Alt text](readme.img/demo1.png)
+![Alt text](readme.img/demo2.png)
+![Alt text](readme.img/demo3.png)
+
+## UML
+**Activity diagram**
+![Alt text](readme.img/activity.png)
 
 ## License
 

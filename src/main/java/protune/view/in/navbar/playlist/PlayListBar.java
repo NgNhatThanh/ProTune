@@ -6,11 +6,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import protune.Init;
 import protune.controller.inapp.PlaylistManager;
+import protune.controller.inapp.PlaylistTrackManager;
 import protune.model.Constant;
 import protune.model.Playlist;
-import protune.view.in.mainzone.playlistpane.PlPaneManager;
 import protune.view.in.navbar.item.NavItem;
 
 import java.io.File;
@@ -39,11 +38,9 @@ public class PlayListBar extends VBox {
         addBtn.setLayoutY(7);
         addBtn.setFocusTraversable(false);
         addBtn.setOnAction(e -> {
-            Playlist newPl = new Playlist(PlaylistManager.getNewName());
+            Playlist newPl = new Playlist(PlaylistTrackManager.getNewName());
             plList.getChildren().add(new PlaylistItem(newPl, this));
-            Init.playlistList.getItems().add(newPl.getName());
             PlaylistManager.add(newPl);
-            PlPaneManager.add(newPl);
         });
 
         tabIndex.getChildren().addAll(title, addBtn);
@@ -58,8 +55,8 @@ public class PlayListBar extends VBox {
     public void importPlaylists(){
         plList.getChildren().clear();
 
-        PlaylistManager.importPlaylists();
-        List<Playlist> l = PlaylistManager.getList();
+        PlaylistTrackManager.importPlaylists();
+        List<Playlist> l = PlaylistTrackManager.getList();
 
         for(Playlist pl : l){
             plList.getChildren().add(new PlaylistItem(pl, this));

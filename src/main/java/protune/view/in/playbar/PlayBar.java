@@ -4,7 +4,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-import protune.controller.inapp.PlaylistManager;
+import protune.controller.inapp.PlaylistTrackManager;
 import protune.controller.inapp.SongListManager;
 import protune.model.AudioData;
 import protune.view.in.playbar.nowplaying.NowPlayingSong;
@@ -99,7 +99,7 @@ public class PlayBar extends FlowPane {
         AudioData nextSong;
 
         if(playingSong.getPlaylist() == null) nextSong = SongListManager.getRandomAudio(this.playingSong);
-        else nextSong = PlaylistManager.getRandAudio(playingSong, playingSong.getPlaylist());
+        else nextSong = PlaylistTrackManager.getRandAudio(playingSong, playingSong.getPlaylist());
 
         try {
             setSongPlay(nextSong);
@@ -114,7 +114,7 @@ public class PlayBar extends FlowPane {
             AudioData nextSong;
 
             if(playingSong.getPlaylist() == null) nextSong = SongListManager.getNextSong(this.playingSong);
-            else nextSong = PlaylistManager.getNextAudio(playingSong, playingSong.getPlaylist());
+            else nextSong = PlaylistTrackManager.getNextAudio(playingSong, playingSong.getPlaylist());
             try {
                 setSongPlay(nextSong);
             } catch (FileNotFoundException e) {
@@ -129,7 +129,7 @@ public class PlayBar extends FlowPane {
             AudioData prevSong;
 
             if(playingSong.getPlaylist() == null) prevSong = SongListManager.getPrevSong(this.playingSong);
-            else prevSong = PlaylistManager.getPrevAudio(playingSong, playingSong.getPlaylist());
+            else prevSong = PlaylistTrackManager.getPrevAudio(playingSong, playingSong.getPlaylist());
             try {
                 setSongPlay(prevSong);
             } catch (FileNotFoundException e) {

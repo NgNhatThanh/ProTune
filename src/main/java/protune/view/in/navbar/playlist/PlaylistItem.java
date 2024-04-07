@@ -5,8 +5,8 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Border;
 import javafx.scene.paint.Color;
-import protune.Init;
 import protune.controller.inapp.PlaylistManager;
+import protune.controller.inapp.PlaylistTrackManager;
 import protune.model.Playlist;
 import protune.view.in.mainzone.playlistpane.PlPaneManager;
 
@@ -31,6 +31,8 @@ public class PlaylistItem extends Label {
         this.setBorder(Border.stroke(Color.GREEN));
         this.setText(playlist.getName());
 
+        changeNameDialog.setTitle("Change playlist's name");
+        changeNameDialog.setHeaderText("Set new name");
         ContextMenu contextMenu = new ContextMenu();
 
         MenuItem editItem = new MenuItem("Edit");
@@ -47,22 +49,18 @@ public class PlaylistItem extends Label {
             newName = changeNameDialog.showAndWait();
             if(newName.isPresent()){
                 alert.setContentText(newName.get() + " is already exists");
-                if(PlaylistManager.exist(newName.get())) alert.showAndWait();
+                if(PlaylistTrackManager.exist(newName.get())) alert.showAndWait();
                 else{
                     this.setText(newName.get());
                     String oldName = this.playlist.getName();
-                    PlaylistManager.changePlName(oldName, newName.get());
-                    PlPaneManager.changeName(oldName, newName.get());
-                    Init.playlistList.changeName(oldName, newName.get());
+                    PlaylistManager.changeName(oldName, newName.get());
                 }
             }
         });
 
         delItem.setOnAction(e -> {
-            PlaylistManager.delPl(playlist);
-            PlPaneManager.delPane(playlist);
             this.par.removeItem(this);
-            Init.playlistList.removeItem(this.playlist.getName());
+            PlaylistManager.del(this.playlist);
         });
 
         contextMenu.getItems().addAll(editItem, delItem);

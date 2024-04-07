@@ -4,7 +4,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Border;
 import javafx.scene.paint.Color;
-import protune.controller.inapp.PlaylistManager;
+import protune.controller.inapp.PlaylistTrackManager;
 import protune.model.AudioData;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class PlaylistList extends ListView<String> {
             String plName = this.getSelectionModel().getSelectedItem();
 
             if(plName != null){
-                PlaylistManager.addTracktoPlaylist(plName, this.currentChoose);
+                PlaylistTrackManager.addTracktoPlaylist(plName, this.currentChoose);
             }
 
             this.setVisible(false);
@@ -48,7 +48,7 @@ public class PlaylistList extends ListView<String> {
     public void importList(){
         this.setVisible(false);
         this.getItems().clear();
-        List<String> plNames = PlaylistManager.getPlNames();
+        List<String> plNames = PlaylistTrackManager.getPlNames();
 
         this.getItems().addAll(plNames);
     }
