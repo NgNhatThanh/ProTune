@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 import protune.controller.inapp.PlaylistManager;
 import protune.controller.inapp.PlaylistTrackManager;
 import protune.model.Playlist;
-import protune.view.in.mainzone.playlistpane.PlPaneManager;
+import protune.controller.inapp.PlPaneManager;
 
 import java.util.Optional;
 

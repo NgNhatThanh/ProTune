@@ -30,6 +30,9 @@
 **Activity diagram**
 ![Alt text](readme.img/activity.png)
 
+**Class diagram**
+![Alt text](readme.img/class.png)
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)

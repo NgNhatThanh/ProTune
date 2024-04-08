@@ -2,7 +2,7 @@ package protune.view.in.mainzone.homepane.audiocard.button;
 
 import protune.controller.inapp.PlaylistTrackManager;
 import protune.view.in.mainzone.homepane.audiocard.PLCard;
-import protune.view.in.mainzone.playlistpane.PlPaneManager;
+import protune.controller.inapp.PlPaneManager;
 
 public class PLDelButton extends CardButton{
 

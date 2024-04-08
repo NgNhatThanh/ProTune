@@ -4,7 +4,7 @@ import protune.Init;
 import protune.controller.inapp.PlaylistTrackManager;
 import protune.controller.auth.Authorization;
 import protune.controller.inapp.SongListManager;
-import protune.view.in.mainzone.playlistpane.PlPaneManager;
+import protune.controller.inapp.PlPaneManager;
 
 import java.io.FileNotFoundException;
 

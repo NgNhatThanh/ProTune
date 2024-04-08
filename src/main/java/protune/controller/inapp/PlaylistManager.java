@@ -2,7 +2,6 @@ package protune.controller.inapp;
 
 import protune.Init;
 import protune.model.Playlist;
-import protune.view.in.mainzone.playlistpane.PlPaneManager;
 
 public class PlaylistManager {
 

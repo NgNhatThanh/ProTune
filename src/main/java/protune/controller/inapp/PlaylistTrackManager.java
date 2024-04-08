@@ -4,7 +4,6 @@ import protune.controller.auth.Authorization;
 import protune.controller.io.FileIOSystem;
 import protune.model.AudioData;
 import protune.model.Playlist;
-import protune.view.in.mainzone.playlistpane.PlPaneManager;
 
 import java.io.File;
 import java.io.IOException;
